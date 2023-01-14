@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,4 +16,18 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-Route::get('/',[PagesController::class, 'home'])->name('home');
+Route::get('/',[PagesController::class, 'all'])->name('all');
+Route::get('/public',[PagesController::class, 'public'])->name('public');
+Route::get('/private',[PagesController::class, 'private'])->name('private');
+Route::get('/create', [PagesController::class, 'form'])->name('create');
+
+Route::post('/store', [DataController::class, 'store']);
+Route::post('/delete',[DataController::class, 'destroy']);
+Route::post('/update',[DataController::class, 'statusUpdate']);
+
+Route::get('/register',[AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register_process',[AuthController::class, 'register'])->name('register_process');
+
+Route::get('/login',[AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login_process',[AuthController::class, 'login'])->name('login_process');
+
