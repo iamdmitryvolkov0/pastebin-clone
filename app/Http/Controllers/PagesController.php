@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\PrivateTasksAction;
-use App\Actions\PublicTasksAction;
+use App\Actions\PrivatePastesAction;
+use App\Actions\PublicPastesAction;
 use Illuminate\Http\Request;
 use App\Models\Paste;
 use App\Actions\AllTasksAction;
@@ -18,17 +18,30 @@ class PagesController extends Controller
         ]);
     }
 
-    public function public(PublicTasksAction $action)
+    public function public(PublicPastesAction $action)
     {
         return view('pastes_public', [
             'pastes' => $action->execute()
         ]);
     }
 
-    public function private(PrivateTasksAction $action)
+    public function private(PrivatePastesAction $action)
     {
         return view('pastes_private', [
             'pastes' => $action->execute()
+        ]);
+    }
+
+    public function pastePage($id)
+    {
+
+        $paste = Paste::find($id);
+        if(!$paste){
+            abort('404');
+        }
+
+        return view('paste_page',[
+        'paste' => $paste,
         ]);
     }
 

@@ -13,7 +13,7 @@ class DataController
         $result = Paste::create([
             'title' => $data['title'],
             'body' => $data['body'],
-            'status' => $data['status']
+            'status' => $data['status'],
         ]);
 
         if ($result) {

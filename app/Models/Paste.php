@@ -18,6 +18,12 @@ class Paste extends Model
 
     use HasFactory;
 
+    public function getAuthor()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+
     protected $casts = [
         'status' => PasteStatusEnum::class,  //преобразователь свойств - читай мутаторы
     ];

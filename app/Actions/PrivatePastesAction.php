@@ -6,7 +6,7 @@ use App\Enums\PasteStatusEnum;
 use App\Models\Paste;
 use Illuminate\Database\Eloquent\Collection;
 
-class PrivateTasksAction
+class PrivatePastesAction
 {
     public function execute(): Collection //получение Paste со статусом PRIVATE
     {

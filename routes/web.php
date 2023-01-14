@@ -19,6 +19,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/',[PagesController::class, 'all'])->name('all');
 Route::get('/public',[PagesController::class, 'public'])->name('public');
 Route::get('/private',[PagesController::class, 'private'])->name('private');
+Route::get('/paste/{id}',[PagesController::class, 'pastePage'])->name('pastePage');
 Route::get('/create', [PagesController::class, 'form'])->name('create');
 
 Route::post('/store', [DataController::class, 'store']);

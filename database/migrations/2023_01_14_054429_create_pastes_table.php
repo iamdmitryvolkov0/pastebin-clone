@@ -19,8 +19,11 @@ return new class extends Migration
             $table->string('title',255)->nullable();
             $table->text('body')->nullable();
             $table->integer('status')->default(PasteStatusEnum::STATUS_PUBLIC->value);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('language',32)->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

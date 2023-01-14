@@ -28,22 +28,24 @@
             <div class="mt-4">
                 <a href="{{route('create')}}" class="btn btn-outline-dark">Create new paste</a>
             </div>
-            <ul class="list-group mt-4">
-                @foreach($pastes as $paste)
-                    <li class="list-group-item d-flex justify-content-between align-items-center mb-3">
-                        <div>
-                            <h4>{{$paste->title}}</h4>
-                            <p style="color: #909090">{{$paste->body}}</p>
-                        </div>
+            @foreach($pastes as $paste)
+                <div class="list-group mb-3 mt-3">
+                    <a href="/paste/{{$paste->id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <small>@author</small>
+                        <input type="hidden" name="id" value="{{$paste->id}}">
                         @if($paste->status->value == 0)
-                            <h4><span class="badge bg-success rounded-pill">Public</span></h4>
+                            <h6><span class="badge bg-success rounded-pill">Public</span></h6>
                         @endif
                         @if($paste->status->value == 1)
-                            <h4><span class="badge bg-primary  rounded-pill">Private</span></h4>
+                            <h6><span class="badge bg-primary  rounded-pill">Private</span></h6>
                         @endif
-                    </li>
-
-                    <div>
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{$paste->title}}</h5>
+                            <small>{{$paste->created_at->format('d-M-Y')}}</small>
+                        </div>
+                        <p class="mb-1">{{$paste->body}}</p>
+                    </a>
+                    <div class="mt-3">
                         @if($paste->status->value != 1)
                             <form action="/update" method="post">
                                 @csrf
@@ -52,15 +54,17 @@
                             </form>
                         @endif
 
-
                         <form action="/delete" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             <button type="submit" class="btn btn-outline-danger mb-3">Delete</button>
                         </form>
                     </div>
-                @endforeach
-            </ul>
+                    @endforeach
+
+                    <ul class="list-group mt-4">
+
+                    </ul>
+                </div>
         </div>
-    </div>
 @endsection
