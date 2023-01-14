@@ -9,10 +9,11 @@ class DataController
 {
     public function store(Request $request)
     {
-        $data = $request->only('title', 'body');
+        $data = $request->only('title', 'body', 'status');
         $result = Paste::create([
             'title' => $data['title'],
             'body' => $data['body'],
+            'status' => $data['status']
         ]);
 
         if ($result) {
@@ -41,8 +42,8 @@ class DataController
             return abort('404');
         }
 
-        $todo -> status = 1;
-        $todo ->save();
+        $todo->status = 1;
+        $todo->save();
         return redirect()->back();
     }
 }

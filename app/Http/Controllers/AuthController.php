@@ -20,7 +20,7 @@ class AuthController
         ]);
 
         if(auth('web')->attempt($data)){
-            return redirect('/todo');
+            return redirect('/');
         }
         redirect(route('login'))->withErrors(['email'=>'User not found']);
 
@@ -28,7 +28,7 @@ class AuthController
 
     public function logout(){
         auth('web')->logout();
-        return redirect('/todo');
+        return redirect('/');
     }
 
     public function showRegisterForm()
