@@ -15,14 +15,14 @@ class AuthController
     public function login(Request $request)
     {
         $data =$request->validate([
-            'email' => ['required','email','string'], //'unique:users'
+            'email' => ['required','email','string'],
             'password'=>['required']
         ]);
 
         if(auth('web')->attempt($data)){
             return redirect('/');
         }
-        redirect(route('login'))->withErrors(['email'=>'User not found']);
+        redirect(route('login'))->withErrors(['email'=>'User not found', 'password' => 'Wrong password']);
 
     }
 

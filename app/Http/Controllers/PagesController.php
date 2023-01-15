@@ -6,12 +6,12 @@ use App\Actions\PrivatePastesAction;
 use App\Actions\PublicPastesAction;
 use Illuminate\Http\Request;
 use App\Models\Paste;
-use App\Actions\AllTasksAction;
+use App\Actions\AllPastesAction;
 
 
 class PagesController extends Controller
 {
-    public function all(AllTasksAction $action)
+    public function all(AllPastesAction $action)
     {
         return view('pastes_all', [
             'pastes' => $action->execute()
@@ -21,14 +21,14 @@ class PagesController extends Controller
     public function public(PublicPastesAction $action)
     {
         return view('pastes_public', [
-            'pastes' => $action->execute()
+            'pastes_public' => $action->execute()
         ]);
     }
 
     public function private(PrivatePastesAction $action)
     {
         return view('pastes_private', [
-            'pastes' => $action->execute()
+            'pastes_private' => $action->execute()
         ]);
     }
 
@@ -36,12 +36,12 @@ class PagesController extends Controller
     {
 
         $paste = Paste::find($id);
-        if(!$paste){
+        if (!$paste) {
             abort('404');
         }
 
-        return view('paste_page',[
-        'paste' => $paste,
+        return view('paste_page', [
+            'paste' => $paste,
         ]);
     }
 
