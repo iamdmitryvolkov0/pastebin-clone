@@ -10,6 +10,7 @@ class PrivatePastesAction
 {
     public function execute(): Collection //получение Paste со статусом PRIVATE
     {
-        return Paste::query()->where('status',PasteStatusEnum::STATUS_PRIVATE)->get();
+        return Paste::query()
+            ->where('status',PasteStatusEnum::STATUS_PRIVATE)->get();
     }
 }

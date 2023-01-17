@@ -10,6 +10,7 @@ class PublicPastesAction
 {
     public function execute(): Collection //получение Paste со статусом PUBLIC
     {
-        return Paste::query()->where('status',PasteStatusEnum::STATUS_PUBLIC)->get();
+        return Paste::query()
+            ->where('status',PasteStatusEnum::STATUS_PUBLIC)->get();
     }
 }

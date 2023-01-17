@@ -19,8 +19,11 @@ use App\Http\Controllers\AuthController;
 Route::get('/',[PagesController::class, 'all'])->name('all');
 Route::get('/public',[PagesController::class, 'public'])->name('public');
 Route::get('/private',[PagesController::class, 'private'])->name('private');
-Route::get('/paste/{id}',[PagesController::class, 'pastePage'])->name('pastePage');
+Route::get('/paste/{id}',[PagesController::class, 'pastePage'])->name('pastePage'); // передавать slug
 Route::get('/create', [PagesController::class, 'form'])->name('create');
+Route::get('/user_pastes',[PagesController::class, 'userPastes'])->name('userPastes');
+Route::get('/profile',[PagesController::class, 'profile'])->name('profile');
+
 
 Route::post('/store', [DataController::class, 'store']);
 Route::post('/delete',[DataController::class, 'destroy']);

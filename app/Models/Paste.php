@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Enums\PasteStatusEnum;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id Идентификатор модели
@@ -18,7 +19,7 @@ class Paste extends Model
 
     use HasFactory;
 
-    public function getAuthor()
+    public function author():HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }

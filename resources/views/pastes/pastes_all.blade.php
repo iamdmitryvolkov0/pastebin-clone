@@ -11,6 +11,7 @@
 
         @auth('web')
             <form action="{{route('logout')}}">
+                <p>Hello, <a href="{{route('profile')}}"> {{$user->name}}</a></p>
                 <button class="btn btn-primary">Log out</button>
             </form>
         @endauth
@@ -25,6 +26,9 @@
             @auth('web')
                 <a href="{{route('private')}}" class="btn btn-outline-primary">Private</a>
             @endauth
+            @auth('web')
+                <a href="{{route('userPastes')}}" class="btn btn-warning">Your pastes</a>
+            @endauth
             <div class="mt-4">
                 <a href="{{route('create')}}" class="btn btn-outline-dark">Create new paste</a>
             </div>
@@ -33,7 +37,7 @@
                     <div class="list-group mb-3 mt-3">
                         <a href="/paste/{{$paste->id}}"
                            class="list-group-item list-group-item-action flex-column align-items-start">
-                            <small>@author</small>
+                            <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             @if($paste->status->value == 0)
                                 <h6><span class="badge bg-success rounded-pill">Public</span></h6>
@@ -64,7 +68,7 @@
                         </div>
                         @endforeach
                     </div>
-
-
+        <div>
+            {{$pastes->links()}}
         </div>
 @endsection
