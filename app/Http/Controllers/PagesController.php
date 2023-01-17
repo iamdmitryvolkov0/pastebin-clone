@@ -28,17 +28,19 @@ class PagesController extends Controller
         ]);
     }
 
-    public function private(PrivatePastesAction $action)
+    public function private(PrivatePastesAction $action, GetUserAction $getUserAction)
     {
         return view('pastes.pastes_private', [
-            'pastes_private' => $action->execute()
+            'pastes_private' => $action->execute(),
+            'user' => $getUserAction->execute()
         ]);
     }
 
-    public function userPastes(AuthorsPastesAction $action)
+    public function userPastes(AuthorsPastesAction $action, GetUserAction $getUserAction)
     {
         return view('pastes.pastes_by_author', [
-            'pastes' => $action->execute()
+            'pastes' => $action->execute(),
+            'user' => $getUserAction->execute()
         ]);
     }
 
@@ -59,8 +61,8 @@ class PagesController extends Controller
 
     public function profile(GetUserAction $getUserAction)
     {
-        return view('auth.profile',[
-            'user'=>$getUserAction->execute()
+        return view('auth.profile', [
+            'user' => $getUserAction->execute()
         ]);
     }
 }

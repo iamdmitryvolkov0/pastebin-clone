@@ -19,7 +19,7 @@ class Paste extends Model
 
     use HasFactory;
 
-    public function author():HasOne
+    public function author(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
@@ -29,6 +29,6 @@ class Paste extends Model
         'status' => PasteStatusEnum::class,  //преобразователь свойств - читай мутаторы
     ];
 
-    protected $fillable = ['title', 'body', 'status'];
+    protected $fillable = ['title', 'body', 'status', 'user_id'];
 
 }

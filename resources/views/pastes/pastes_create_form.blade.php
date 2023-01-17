@@ -27,18 +27,20 @@
                     Public (for everyone)
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="status" id="status" value="1">
-                <label class="form-check-label" for="status">
-                    Private (only for authorized users)
-                </label>
-            </div>
-            <div class="form-check mb-3">
-                <input class="form-check-input" type="radio" name="status" id="status" value="2">
-                <label class="form-check-label" for="status">
-                    Unlisted (only with link)
-                </label>
-            </div>
+            @auth('web')
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="status" value="1">
+                    <label class="form-check-label" for="status">
+                        Private (only for authorized users)
+                    </label>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="status" id="status" value="2">
+                    <label class="form-check-label" for="status">
+                        Unlisted (only with link)
+                    </label>
+                </div>
+            @endauth
             <button type="submit" class="btn btn-primary">Add new task</button>
         </form>
     </div>
