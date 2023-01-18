@@ -8,6 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property int $id Идентификатор модели
+ * @property string $name Имя пользователя
+ * @property string $email Адрес электронной почты
+ * @property string $password Пароль
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;

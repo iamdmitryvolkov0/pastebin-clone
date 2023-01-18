@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetUserAction;
 use App\Models\Paste;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DataController
 {
-    public function store(Request $request)
+    public function store(Request $request):RedirectResponse
     {
         $data = $request->only('title', 'body', 'status');
-        $userId=auth()->id();
         $result = Paste::create([
             'title' => $data['title'],
             'body' => $data['body'],
             'status' => $data['status'],
-            'user_id' => $userId
+            'user_id' => Auth::id()
         ]);
 
         if ($result) {
@@ -24,21 +24,18 @@ class DataController
         }
     }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request): RedirectResponse
     {
-        $todo = Paste::findOrFail($request->id);
-
-        $todo->delete();
-
+        $paste = Paste::findOrFail($request->id);
+        $paste->delete();
         return redirect()->back();
     }
 
-    public function statusUpdate(Request $request)
+    public function statusUpdate(Request $request): RedirectResponse
     {
-        $todo = Paste::findOrFail($request->id);
-
-        $todo->status = 1;
-        $todo->save();
+        $paste = Paste::findOrFail($request->id);
+        $paste->status = 1;
+        $paste->save();
         return redirect()->back();
     }
 }

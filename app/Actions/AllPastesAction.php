@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Enums\PasteStatusEnum;
 use App\Models\Paste;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class AllPastesAction
 {
@@ -13,9 +14,9 @@ class AllPastesAction
         $query = Paste::query()
             ->with(['author'])
             ->whereNot('status', PasteStatusEnum::STATUS_UNLISTED);
-        $userId = auth()->id();
-        if (!is_null($userId)) {
-            $query->whereOr('user_id', $userId);
+        $user = Auth::user();
+        if (!is_null($user)) {
+            $query->whereOr('user_id', $user['id']);
         } else {
             $query->whereNull('user_id');
         }

@@ -24,19 +24,18 @@ Route::get('/create', [PagesController::class, 'form'])->name('create');
 Route::get('/user_pastes', [PagesController::class, 'userPastes'])->name('userPastes');
 Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
 
-Route::post('/store', [DataController::class, 'store']);
-Route::post('/delete', [DataController::class, 'destroy']);
-Route::post('/update', [DataController::class, 'statusUpdate']);
+Route::post('/store', [DataController::class, 'store'])->name('store');
+Route::post('/delete', [DataController::class, 'destroy'])->name('destroy');
+Route::post('/update', [DataController::class, 'statusUpdate'])->name('statusUpdate');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-});
 
-Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 
-    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
-});
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
+
 

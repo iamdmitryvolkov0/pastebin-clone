@@ -15,8 +15,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class Paste extends Model
 {
-    protected $table = 'Pastes';
-
     use HasFactory;
 
     public function author(): HasOne
@@ -26,7 +24,7 @@ class Paste extends Model
 
 
     protected $casts = [
-        'status' => PasteStatusEnum::class,  //преобразователь свойств - читай мутаторы
+        'status' => PasteStatusEnum::class,
     ];
 
     protected $fillable = ['title', 'body', 'status', 'user_id'];

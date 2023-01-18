@@ -5,13 +5,13 @@
 
         <h1 class="display-4">Create new paste</h1>
         <div class="mt-5">
-            <a href="/" class="btn btn-outline-secondary">All pastes</a>
-            <a href="/public" class="btn btn-outline-success">Public</a>
-            <a href="/private" class="btn btn-outline-warning">Private</a>
+            <a href="{{route('all')}}" class="btn btn-outline-secondary">All pastes</a>
+            <a href="{{route('public')}}" class="btn btn-outline-success">Public</a>
+            <a href="{{route('private')}}" class="btn btn-outline-warning">Private</a>
         </div>
     </div>
     <div class="container mt-5">
-        <form method="POST" action="/store">
+        <form method="POST" action="{{route('store')}}">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Title</label>
