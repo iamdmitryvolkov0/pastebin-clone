@@ -4,46 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\View\View;
 
 class AuthController
 {
-    public function showLoginForm():View
+    public function showLoginForm(): View
     {
         return view('auth.login');
     }
 
     public function login(Request $request)
     {
-        $data = $request->validate([
-            'email' => ['required', 'email', 'string'],
-            'password' => ['required']
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        if (auth('web')->attempt($data)) {
-            return redirect (route('all'));
+        if (Auth::attempt($credentials)) {
+            return redirect(route('all'));
         }
-        redirect(route('login'))->withErrors(['email' => 'User not found', 'password' => 'Wrong password']);
+        return redirect(route('login'));
     }
 
-    public function logout():RedirectResponse
+    public function logout(): RedirectResponse
     {
-        auth('web')->logout();
+        Auth::logout();
 
         return redirect('/');
     }
 
-    public function showRegisterForm():View
+    public function showRegisterForm(): View
     {
         return view('auth.register');
     }
 
-    public function register(Request $request):RedirectResponse
+    public function register(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'string','unique'],
+            'email' => ['required', 'email', 'string', 'unique'],
             'password' => ['required', 'confirmed']
         ]);
 
