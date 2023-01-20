@@ -10,11 +10,6 @@ use Illuminate\View\View;
 
 class AuthController
 {
-    public function showLoginForm(): View
-    {
-        return view('auth.login');
-    }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -30,11 +25,6 @@ class AuthController
         Auth::logout();
 
         return redirect('/');
-    }
-
-    public function showRegisterForm(): View
-    {
-        return view('auth.register');
     }
 
     public function register(Request $request): RedirectResponse
