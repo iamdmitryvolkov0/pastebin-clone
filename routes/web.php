@@ -18,6 +18,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+//TODO Делаем по красоте роуты с префиксами
 Route::prefix('/pastes')->group(function() {
     Route::get('/', [PagesController::class, 'all'])->name('all');
     Route::post('/', [PagesController::class, 'store'])->name('store');

@@ -7,12 +7,10 @@ use App\Actions\GetPastesByStatusAction;
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Paste;
 use App\Actions\GetAllPastesAction;
 use Illuminate\Support\Facades\Auth;
-
 
 class PagesController extends Controller
 {
@@ -24,6 +22,7 @@ class PagesController extends Controller
         ]);
     }
 
+    //TODO Сделал общий метод с параметром
     public function public(GetPastesByStatusAction $action):View
     {
         return view('pastes.pastes_public', [
@@ -31,6 +30,7 @@ class PagesController extends Controller
         ]);
     }
 
+    //TODO Сделал общий метод с параметром
     public function private(GetPastesByStatusAction $action):View
     {
         return view('pastes.pastes_private', [
@@ -39,6 +39,7 @@ class PagesController extends Controller
         ]);
     }
 
+    //TODO логика с all общая
     public function users(GetAllPastesAction $action): View
     {
         return view('pastes.pastes_by_author', [
@@ -56,6 +57,7 @@ class PagesController extends Controller
         ]);
     }
 
+    //TODO Перенёс методы сюда
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {
         $action->execute($request->validated());
@@ -63,6 +65,7 @@ class PagesController extends Controller
         return redirect('/');
     }
 
+    //TODO Добавил параметр по красоте
     public function delete(int $id): RedirectResponse
     {
         $paste = Paste::findOrFail($id);
@@ -71,6 +74,7 @@ class PagesController extends Controller
         return redirect()->back();
     }
 
+    //TODO Добавил параметр по красоте
     public function update(int $id): RedirectResponse
     {
         $paste = Paste::findOrFail($id);

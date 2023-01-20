@@ -6,6 +6,7 @@ use Illuminate\View\View;
 
 class AuthFormsController
 {
+    //TODO выносим формы в отдельные контроллеры
     public function login(): View
     {
         return view('auth.login');

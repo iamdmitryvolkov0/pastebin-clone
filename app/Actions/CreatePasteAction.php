@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CreatePasteAction
 {
+    //TODO выносим метод создания
     public function execute(array $fields): void
     {
         Paste::create([

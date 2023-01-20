@@ -25,10 +25,11 @@ class CreatePasteRequest extends FormRequest
      */
     public function rules()
     {
+        //TODO Делаем валидацию по красоте
         return [
             'title' => ['required', 'string'],
             'body' => ['required', 'string'],
-            'status' => ['sometimes', new Enum(PasteStatusEnum::class)]
+            'status' => ['sometimes', new Enum(PasteStatusEnum::class)] //TODO Если передал поле, то можно только перечисленные в enum
         ];
     }
 }
