@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $title Заголовок
  * @property string $body Описание
  * @property int $status Статус пасты
+ * @property string $hash_link Хэш для роута
  */
 class Paste extends Model
 {
@@ -27,6 +28,8 @@ class Paste extends Model
         'status' => PasteStatusEnum::class,
     ];
 
-    protected $fillable = ['title', 'body', 'status', 'user_id'];
+    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link'];
+
+    protected $hidden = ['hash_link'];
 
 }

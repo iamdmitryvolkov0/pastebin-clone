@@ -22,11 +22,11 @@ use App\Http\Controllers\AuthController;
 Route::prefix('/pastes')->group(function() {
     Route::get('/', [PagesController::class, 'all'])->name('all');
     Route::post('/', [PagesController::class, 'store'])->name('store');
-    Route::delete('/{id}', [PagesController::class, 'delete'])->name('destroy');
+    Route::delete('/{hash}', [PagesController::class, 'delete'])->name('destroy');
     Route::post('/update', [PagesController::class, 'update'])->name('statusUpdate');
     Route::get('/public', [PagesController::class, 'public'])->name('public');
     Route::get('/private', [PagesController::class, 'private'])->name('private');
-    Route::get('/{id}', [PagesController::class, 'get'])->name('pastePage'); // передавать slug
+    Route::get('/{hash}', [PagesController::class, 'get'])->name('pastePage'); // передавать slug
     Route::get('/create', [PageFormsController::class, 'create'])->name('create');
     Route::get('/user_pastes', [PagesController::class, 'users'])->name('userPastes');
 });

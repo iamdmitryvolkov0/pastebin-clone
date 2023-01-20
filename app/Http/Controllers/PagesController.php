@@ -48,9 +48,9 @@ class PagesController extends Controller
         ]);
     }
 
-    public function get(int $id): View
+    public function get(string $hash): View
     {
-        $paste = Paste::findOrFail($id);
+        $paste = Paste::query()->where('hash_link', $hash)->firstOrFail();
 
         return view('pastes.paste_page', [
             'paste' => $paste,
@@ -66,18 +66,18 @@ class PagesController extends Controller
     }
 
     //TODO Добавил параметр по красоте
-    public function delete(int $id): RedirectResponse
+    public function delete(string $hash): RedirectResponse
     {
-        $paste = Paste::findOrFail($id);
+        $paste = Paste::query()->where('hash_link', $hash)->firstOrFail();
         $paste->delete();
 
         return redirect()->back();
     }
 
     //TODO Добавил параметр по красоте
-    public function update(int $id): RedirectResponse
+    public function update(string $hash): RedirectResponse
     {
-        $paste = Paste::findOrFail($id);
+        $paste = Paste::query()->where('hash_link', $hash)->firstOrFail();
         $paste->status = 1;
         $paste->save();
 
