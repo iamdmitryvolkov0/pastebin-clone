@@ -38,7 +38,7 @@
                     <a href="/paste/{{$paste->id}}"
                        {{--Для авторизованных пользователей видны только их приватные посты и все публичные--}}
                        @auth('web')
-                           @if($paste->user_id == $user->id | $paste->status->value !==2)
+                           @if($paste->user_id == $user->id & $paste->status->value !==2)
                                class="list-group-item list-group-item-action flex-column align-items-start">
                         <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                         <input type="hidden" name="id" value="{{$paste->id}}">
@@ -56,7 +56,7 @@
                     </a>
                     <div class="mt-3">
                         @if($paste->status->value != 1)
-                            <form action="/update" method="post">
+                            <form action="{{route('update')}}" method="post">
                                 @csrf
                                 <input type="hidden" name="id" value="{{$paste->id}}">
                                 <button type="submit" class="btn btn-outline-success mb-3">Make private</button>

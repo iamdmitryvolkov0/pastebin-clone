@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\AuthorsPastesAction;
-use App\Actions\PrivatePastesAction;
-use App\Actions\PublicPastesAction;
 use Illuminate\View\View;
 use App\Models\Paste;
-use App\Actions\AllPastesAction;
+use App\Actions\GetAllPastesAction;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\PasteStatusEnum;
+use App\Http\Requests\CreatePasteRequest;
+use Illuminate\Http\RedirectResponse;
+use App\Actions\GetPastesByStatusAction;
+use App\Actions\CreatePasteAction;
 
 
 class PagesController extends Controller
 {
-    public function all(AllPastesAction $action):View
+    public function all(GetAllPastesAction $action): View
     {
         return view('pastes.pastes_all', [
             'pastes' => $action->execute(),
@@ -21,22 +23,22 @@ class PagesController extends Controller
         ]);
     }
 
-    public function public(PublicPastesAction $action):View
+    public function public(GetPastesByStatusAction $action): View
     {
         return view('pastes.pastes_public', [
-            'pastes_public' => $action->execute()
+            'pastes_public' => $action->execute(PasteStatusEnum::STATUS_PUBLIC)
         ]);
     }
 
-    public function private(PrivatePastesAction $action):View
+    public function private(GetPastesByStatusAction $action): View
     {
         return view('pastes.pastes_private', [
-            'pastes_private' => $action->execute(),
+            'pastes_private' => $action->execute(PasteStatusEnum::STATUS_PRIVATE),
             'user' => Auth::user()
         ]);
     }
 
-    public function userPastes(AuthorsPastesAction $action): View
+    public function userPastes(GetAllPastesAction $action): View
     {
         return view('pastes.pastes_by_author', [
             'pastes' => $action->execute(),
@@ -44,7 +46,7 @@ class PagesController extends Controller
         ]);
     }
 
-    public function pastePage(int $id): View
+    public function get(int $id): View
     {
 
         $paste = Paste::findOrFail($id);
@@ -54,15 +56,27 @@ class PagesController extends Controller
         ]);
     }
 
-    public function form():View
+    public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {
-        return view('pastes.pastes_create_form');
+        $action->execute($request->validated());
+
+        return redirect(route('all'));
     }
 
-    public function profile():View
+    public function delete(int $id): RedirectResponse
     {
-        return view('auth.profile', [
-            'user' => Auth::user()
-        ]);
+        $paste = Paste::findOrFail($id);
+        $paste->delete();
+
+        return redirect(back());
+    }
+
+    public function update(int $id):RedirectResponse
+    {
+        $paste = Paste::findOrFail($id);
+        $paste->status = 1;
+        $paste->save();
+
+        return redirect()->back();
     }
 }
