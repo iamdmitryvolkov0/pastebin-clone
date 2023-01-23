@@ -35,13 +35,14 @@
 
             @foreach($pastes as $paste)
                 <div class="list-group mb-3 mt-3">
-                    <a href="/paste/{{$paste->id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="{{route('pastePage',['hash'=>$paste->hash_link])}}" class="list-group-item list-group-item-action flex-column align-items-start">
                        {{--Для авторизованных пользователей видны только их приватные посты и все публичные--}}
                        @auth('web')
                            @if($paste->status->value !==2)
 
                         <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                         <input type="hidden" name="id" value="{{$paste->id}}">
+
                         @if($paste->status->value == 0)
                             <h6><span class="badge bg-success rounded-pill">Public</span></h6>
                         @endif

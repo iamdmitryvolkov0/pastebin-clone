@@ -26,8 +26,8 @@ class CreatePasteRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'body' => ['required', 'string'],
+            'title' => ['required', 'string', 'min:10'],
+            'body' => ['required', 'string', 'min:10'],
             'status' => ['sometimes', new Enum(PasteStatusEnum::class)]
         ];
     }

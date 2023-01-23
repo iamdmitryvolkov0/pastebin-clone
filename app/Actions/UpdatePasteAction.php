@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Enums\PasteStatusEnum;
 use App\Models\Paste;
 
 class UpdatePasteAction
@@ -9,7 +10,7 @@ class UpdatePasteAction
     public function execute(int $id)
     {
         $paste = Paste::findOrFail($id);
-        $paste->status = 1;
+        $paste->status = PasteStatusEnum::STATUS_PRIVATE;
         $paste->save();
     }
 }
