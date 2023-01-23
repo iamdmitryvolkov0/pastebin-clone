@@ -35,7 +35,8 @@
 
             @foreach($pastes as $paste)
                 <div class="list-group mb-3 mt-3">
-                    <a href="{{route('pastePage',['hash'=>$paste->hash_link])}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                <a href="{{route('pastePage',['hash'=>$paste->hash_link])}}" class="list-group-item list-group-item-action flex-column align-items-start">
+
                        {{--Для авторизованных пользователей видны только их приватные посты и все публичные--}}
                        @auth('web')
                            @if($paste->status->value !==2)
@@ -89,14 +90,6 @@
                             </div>
                             <p class="mb-1">{{$paste->body}}</p>
                             <div class="mt-3">
-                                @if($paste->status->value != 1)
-                                    <form action="{{route('update')}}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{$paste->id}}">
-                                        <button type="submit" class="btn btn-outline-success mb-3">Make private</button>
-                                    </form>
-                                @endif
-
                                 <form action="{{route('delete')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$paste->id}}">

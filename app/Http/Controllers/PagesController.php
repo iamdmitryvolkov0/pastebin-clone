@@ -52,7 +52,6 @@ class PagesController extends Controller
 
     public function get(string $hash): View
     {
-        dd(1);
         $paste = Paste::query()->where('hash_link',$hash)->firstOrFail();
         return view('pastes.paste_page',
             [
