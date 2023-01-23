@@ -27,7 +27,7 @@ Route::get('/user_pastes', [PagesController::class, 'userPastes'])->name('userPa
 Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
 Route::post('/store', [PagesController::class, 'store'])->name('store');
-Route::post('/delete', [PagesController::class, 'delete'])->name('destroy');
+Route::post('/delete', [PagesController::class, 'delete'])->name('delete');
 Route::post('/update', [PagesController::class, 'update'])->name('update');
 
 

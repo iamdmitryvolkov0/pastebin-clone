@@ -17,9 +17,10 @@ class GetAllPastesAction
         $user = Auth::user();
 
         if (!is_null($user)) {
-            $query->whereOr('user_id', $user['id']);
+            $query->where('status', PasteStatusEnum::STATUS_PRIVATE)
+                ->orWhere('status', PasteStatusEnum::STATUS_PUBLIC);
         } else {
-            $query->whereNull('user_id');
+            $query->where('status', PasteStatusEnum::STATUS_PUBLIC);
         }
 
         return $query->latest()

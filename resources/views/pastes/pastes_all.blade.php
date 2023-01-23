@@ -35,11 +35,11 @@
 
             @foreach($pastes as $paste)
                 <div class="list-group mb-3 mt-3">
-                    <a href="/paste/{{$paste->id}}"
+                    <a href="/paste/{{$paste->id}}" class="list-group-item list-group-item-action flex-column align-items-start">
                        {{--Для авторизованных пользователей видны только их приватные посты и все публичные--}}
                        @auth('web')
-                           @if($paste->user_id == $user->id & $paste->status->value !==2)
-                               class="list-group-item list-group-item-action flex-column align-items-start">
+                           @if($paste->status->value !==2)
+
                         <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                         <input type="hidden" name="id" value="{{$paste->id}}">
                         @if($paste->status->value == 0)
@@ -63,7 +63,7 @@
                             </form>
                         @endif
 
-                        <form action="/delete" method="post">
+                        <form action="{{route('delete')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             <button type="submit" class="btn btn-outline-danger mb-3">Delete</button>
@@ -71,10 +71,9 @@
                     </div>
                     @endif
                     @endauth
-                    {{--Для гостей видны только анонимные публичные посты --}}
+                    {{--Для гостей видны только публичные посты --}}
                     @guest('web')
-                        @if(!is_null($paste->user_id) | $paste->status->value == 0)
-                            class="list-group-item list-group-item-action flex-column align-items-start">
+                        @if($paste->status->value == 0)
                             <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             @if($paste->status->value == 0)
@@ -88,17 +87,16 @@
                                 <small>{{$paste->created_at->format('d-M-Y')}}</small>
                             </div>
                             <p class="mb-1">{{$paste->body}}</p>
-                            </a>
                             <div class="mt-3">
                                 @if($paste->status->value != 1)
-                                    <form action="/update" method="post">
+                                    <form action="{{route('update')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$paste->id}}">
                                         <button type="submit" class="btn btn-outline-success mb-3">Make private</button>
                                     </form>
                                 @endif
 
-                                <form action="/delete" method="post">
+                                <form action="{{route('delete')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="id" value="{{$paste->id}}">
                                     <button type="submit" class="btn btn-outline-danger mb-3">Delete</button>

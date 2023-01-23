@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\DeletePasteAction;
+use App\Actions\UpdatePasteAction;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Paste;
 use App\Actions\GetAllPastesAction;
@@ -63,20 +66,17 @@ class PagesController extends Controller
         return redirect(route('all'));
     }
 
-    public function delete(int $id): RedirectResponse
+    public function delete(Request $request, DeletePasteAction $action):RedirectResponse
     {
-        $paste = Paste::findOrFail($id);
-        $paste->delete();
+        $action->execute($request->id);
 
-        return redirect(back());
+        return redirect(route('all'));
     }
 
-    public function update(int $id):RedirectResponse
+    public function update(Request $request, UpdatePasteAction $action):RedirectResponse
     {
-        $paste = Paste::findOrFail($id);
-        $paste->status = 1;
-        $paste->save();
+        $action->execute($request->id);
 
-        return redirect()->back();
+        return redirect(route('all'));
     }
 }
