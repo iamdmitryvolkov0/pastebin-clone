@@ -27,6 +27,12 @@ class Paste extends Model
         'status' => PasteStatusEnum::class,
     ];
 
-    protected $fillable = ['title', 'body', 'status', 'user_id'];
+    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link'];
 
+    protected $hidden = ['hash_link'];
+
+    public function getRouteKeyName()
+    {
+        return 'hash_link';
+    }
 }

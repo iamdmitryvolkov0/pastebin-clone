@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\DeletePasteAction;
+use App\Actions\GetSinglePasteAction;
 use App\Actions\UpdatePasteAction;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 use App\Models\Paste;
 use App\Actions\GetAllPastesAction;
@@ -49,14 +51,12 @@ class PagesController extends Controller
         ]);
     }
 
-    public function get(int $id): View
+    public function get(string $hash,GetSinglePasteAction $action): View
     {
-
-        $paste = Paste::findOrFail($id);
-
-        return view('pastes.paste_page', [
-            'paste' => $paste,
-        ]);
+        return view('pastes.paste_page',
+            [
+                'paste' => $action->execute($hash),
+            ]);
     }
 
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
@@ -66,14 +66,14 @@ class PagesController extends Controller
         return redirect(route('all'));
     }
 
-    public function delete(Request $request, DeletePasteAction $action):RedirectResponse
+    public function delete(Request $request, DeletePasteAction $action): RedirectResponse
     {
         $action->execute($request->id);
 
         return redirect(route('all'));
     }
 
-    public function update(Request $request, UpdatePasteAction $action):RedirectResponse
+    public function update(Request $request, UpdatePasteAction $action): RedirectResponse
     {
         $action->execute($request->id);
 

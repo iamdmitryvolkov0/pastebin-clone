@@ -30,9 +30,9 @@ class AuthController
     public function register(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'min:4'],
             'email' => ['required', 'email', 'string', 'unique:users'],
-            'password' => ['required', 'confirmed']
+            'password' => ['required', 'confirmed', 'min:8']
         ]);
 
         $user = User::create([
