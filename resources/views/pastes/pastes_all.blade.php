@@ -40,10 +40,10 @@
                        class="list-group-item list-group-item-action flex-column align-items-start">
                         <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                         <input type="hidden" name="id" value="{{$paste->id}}">
-                        @if($paste->status->value == 0)
+                        @if($paste->status ==\App\Enums\PasteStatusEnum::STATUS_PUBLIC)
                             <h6><span class="badge bg-success rounded-pill">Public</span></h6>
                         @endif
-                        @if($paste->status->value == 1)
+                        @if($paste->status == \App\Enums\PasteStatusEnum::STATUS_PRIVATE)
                             <h6><span class="badge bg-primary  rounded-pill">Private</span></h6>
                         @endif
                         {{--Блок с наполнением title и body--}}
