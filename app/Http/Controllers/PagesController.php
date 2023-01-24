@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\DeletePasteAction;
+use App\Actions\GetSinglePasteAction;
 use App\Actions\UpdatePasteAction;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -50,12 +51,11 @@ class PagesController extends Controller
         ]);
     }
 
-    public function get(string $hash): View
+    public function get(string $hash,GetSinglePasteAction $action): View
     {
-        $paste = Paste::query()->where('hash_link',$hash)->firstOrFail();
         return view('pastes.paste_page',
             [
-                'paste' => $paste,
+                'paste' => $action->execute($hash),
             ]);
     }
 
