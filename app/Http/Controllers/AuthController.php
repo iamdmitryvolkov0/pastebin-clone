@@ -10,11 +10,6 @@ use Illuminate\View\View;
 
 class AuthController
 {
-    public function showLoginForm(): View
-    {
-        return view('auth.login');
-    }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -32,17 +27,12 @@ class AuthController
         return redirect('/');
     }
 
-    public function showRegisterForm(): View
-    {
-        return view('auth.register');
-    }
-
     public function register(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'string', 'unique'],
-            'password' => ['required', 'confirmed']
+            'name' => ['required', 'string', 'min:4'],
+            'email' => ['required', 'email', 'string', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8']
         ]);
 
         $user = User::create([

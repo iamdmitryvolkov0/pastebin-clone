@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\DataController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthFormsController;
+use App\Http\Controllers\PastesFormsController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,23 +21,22 @@ use App\Http\Controllers\AuthController;
 Route::get('/', [PagesController::class, 'all'])->name('all');
 Route::get('/public', [PagesController::class, 'public'])->name('public');
 Route::get('/private', [PagesController::class, 'private'])->name('private');
-Route::get('/paste/{id}', [PagesController::class, 'pastePage'])->name('pastePage'); // передавать slug
-Route::get('/create', [PagesController::class, 'form'])->name('create');
+Route::get('/paste/{hash}', [PagesController::class, 'get'])->name('pastePage');
+Route::get('/create', [PastesFormsController::class, 'create'])->name('create');
 Route::get('/user_pastes', [PagesController::class, 'userPastes'])->name('userPastes');
-Route::get('/profile', [PagesController::class, 'profile'])->name('profile');
+Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 
-Route::post('/store', [DataController::class, 'store'])->name('store');
-Route::post('/delete', [DataController::class, 'destroy'])->name('destroy');
-Route::post('/update', [DataController::class, 'statusUpdate'])->name('statusUpdate');
-
-
+Route::post('/store', [PagesController::class, 'store'])->name('store');
+Route::post('/delete', [PagesController::class, 'delete'])->name('delete');
+Route::post('/update', [PagesController::class, 'update'])->name('update');
 
 
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+
+Route::get('/login', [AuthFormsController::class, 'login'])->name('login');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+Route::get('/register', [AuthFormsController::class, 'register'])->name('register');
 Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
 
 

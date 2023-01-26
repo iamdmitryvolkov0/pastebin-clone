@@ -41,8 +41,51 @@
                     </label>
                 </div>
             @endauth
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" disabled>
+                <label class="form-check-label" for="hide_in">
+                    (by default) Don`t delete
+                </label>
+            </div>
+            {{--            10 min,1 hour, 3 hours, 1 day, 1 week, 1month expired options--}}
+            {{--VALUE SET IN MINUTES--}}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="10">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in 10 minutes]
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="60">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in an hour]
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="180">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in 3 hours]
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="1440">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in a day]
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="10080">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in a week]
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="302400">
+                <label class="form-check-label" for="hide_in">
+                    [Delete in a month]
+                </label>
+            </div>
             <button type="submit" class="btn btn-primary">Add new task</button>
         </form>
     </div>
-    </form>
 @endsection

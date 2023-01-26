@@ -3,7 +3,7 @@
 @section('content')
     <div class="container mt-5">
         <div class="jumbotron">
-            <h1 class="display-4">All pastes</h1>
+            <h1 class="display-4">Public pastes</h1>
             <a href="{{route('all')}}" class="btn btn-outline-secondary">All pastes</a>
             <a href="{{route('public')}}" class="btn btn-outline-success">Public</a>
             @auth('web')
