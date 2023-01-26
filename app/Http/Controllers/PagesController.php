@@ -6,9 +6,7 @@ use App\Actions\DeletePasteAction;
 use App\Actions\GetSinglePasteAction;
 use App\Actions\UpdatePasteAction;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
-use App\Models\Paste;
 use App\Actions\GetAllPastesAction;
 use Illuminate\Support\Facades\Auth;
 use App\Enums\PasteStatusEnum;
@@ -62,7 +60,6 @@ class PagesController extends Controller
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {
         $action->execute($request->validated());
-
         return redirect(route('all'));
     }
 

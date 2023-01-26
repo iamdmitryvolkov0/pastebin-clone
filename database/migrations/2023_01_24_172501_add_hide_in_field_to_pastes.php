@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -14,7 +13,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pastes', function (Blueprint $table) {
-            $table->string('hash_link')->unique();
+            $table->timestamp('hide_in')->nullable();
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pastes', function (Blueprint $table) {
-            $table->dropColumn('hash_link');
+            $table->dropColumn('hide_in');;
         });
     }
 };

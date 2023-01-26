@@ -33,7 +33,7 @@ class TestCommand extends Command
             $this->comment("Создание новой пасты");
             PastesFactory::new()->createOne();
             $this->info("Паста создана");
-            sleep(5);
+            sleep(60);
         }
     }
 
