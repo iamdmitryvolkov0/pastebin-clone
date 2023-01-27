@@ -49,10 +49,9 @@ class PagesController extends Controller
         ]);
     }
 
-    public function get(string $hash,GetSinglePasteAction $action): View
+    public function get(string $hash, GetSinglePasteAction $action): View
     {
-        return view('pastes.paste_page',
-            [
+        return view('pastes.paste_page', [
                 'paste' => $action->execute($hash),
             ]);
     }
@@ -60,6 +59,7 @@ class PagesController extends Controller
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {
         $action->execute($request->validated());
+
         return redirect(route('all'));
     }
 

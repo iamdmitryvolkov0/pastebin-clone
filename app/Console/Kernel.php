@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('command:hideExpiredPastes')->everyMinute();
+//        $schedule->command('command:hideExpiredPastes')->everyMinute();
     }
 
     /**

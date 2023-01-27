@@ -41,14 +41,9 @@
                     </label>
                 </div>
             @endauth
-            <div class="form-check mt-3">
-                <input class="form-check-input" type="checkbox" disabled>
-                <label class="form-check-label" for="hide_in">
-                    (by default) Don`t delete
-                </label>
-            </div>
             {{--            10 min,1 hour, 3 hours, 1 day, 1 week, 1month expired options--}}
             {{--VALUE SET IN MINUTES--}}
+            <label class="form-check-label">Hide in (default: not hide)</label>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="hide_in" id="hide_in" value="10">
                 <label class="form-check-label" for="hide_in">

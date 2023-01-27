@@ -33,16 +33,19 @@ class HideExpiredPastes extends Command
     {
         $pastes = Paste::query()->whereNot('status', PasteStatusEnum::STATUS_HIDDEN)->whereNotNull('hide_in')->get();
 
-        $this->comment("Проверка срока жизни паст");
-
-        foreach ($pastes as $paste) {
-            if ($paste->hide_in < Carbon::now()) {
-                $paste->status = PasteStatusEnum::STATUS_HIDDEN;
-                $paste->save();
+        while (true) {
+            $this->comment("Проверка срока жизни паст");
+            foreach ($pastes as $paste) {
+                if ($paste->hide_in < Carbon::now()) {
+                    $paste->status = PasteStatusEnum::STATUS_HIDDEN;
+                    $paste->save();
+                }
             }
+            $this->info("Истекшие пасты cкрыты");
+            sleep('60');
         }
 
-        $this->info("Истекшие пасты удалены");
+
     }
 
 }
