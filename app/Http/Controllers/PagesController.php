@@ -63,13 +63,15 @@ class PagesController extends Controller
         return redirect(route('all'));
     }
 
-    public function delete(Request $request, DeletePasteAction $action): RedirectResponse
+    //TODO переделать по аналогии с методом get
+    public function delete(int $request, DeletePasteAction $action): RedirectResponse
     {
         $action->execute($request->id);
 
         return redirect(route('all'));
     }
 
+    //TODO переделать по аналогии с методом get
     public function update(Request $request, UpdatePasteAction $action): RedirectResponse
     {
         $action->execute($request->id);

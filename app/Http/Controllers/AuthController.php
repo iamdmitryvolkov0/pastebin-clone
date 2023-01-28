@@ -12,6 +12,7 @@ class AuthController
 {
     public function login(Request $request)
     {
+        //TODO Сделать валидацию в FormRequest
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
@@ -29,12 +30,14 @@ class AuthController
 
     public function register(Request $request): RedirectResponse
     {
+        //TODO вынести в FormRequest
         $data = $request->validate([
             'name' => ['required', 'string', 'min:4'],
             'email' => ['required', 'email', 'string', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:8']
         ]);
 
+        //Вынести в action
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],

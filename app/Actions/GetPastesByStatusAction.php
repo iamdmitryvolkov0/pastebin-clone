@@ -11,7 +11,7 @@ class GetPastesByStatusAction
     public function execute(PasteStatusEnum $status): Collection
     {
         return Paste::query()
-            ->where('status',$status)
+            ->where('status', $status)
             ->get();
     }
 }
