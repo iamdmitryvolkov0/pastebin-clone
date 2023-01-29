@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\PasteStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
-class CreatePasteRequest extends FormRequest
+class CreateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +24,9 @@ class CreatePasteRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string', 'min:10'],
-            'body' => ['required', 'string', 'min:10'],
-            'status' => ['sometimes', new Enum(PasteStatusEnum::class)],
-            'hide_in' => ['sometimes', 'integer', 'nullable'],
-            'language' => ['sometimes', 'string', 'nullable']
+            'name' => ['required', 'string', 'min:4'],
+            'email' => ['required', 'email', 'string', 'unique:users'],
+            'password' => ['required', 'confirmed', 'min:8']
         ];
     }
 }

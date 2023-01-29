@@ -9,21 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class GetAllPastesAction
 {
-    public function execute(): Paginator //получение Paste со статусом PUBLIC | PRIVATE
+    public function execute(): Paginator
     {
-        $query = Paste::query()
-            ->whereNot('status', PasteStatusEnum::STATUS_UNLISTED);
+        $query = Paste::query()->where('status', PasteStatusEnum::STATUS_PUBLIC);
 
-        $user = Auth::user();
+        $userId = Auth::id();
 
-        if (!is_null($user)) {
-            $query->where('status', PasteStatusEnum::STATUS_PUBLIC)
-            ->orWhere('user_id',$user['id']);
-        } else {
-            $query->where('status', PasteStatusEnum::STATUS_PUBLIC);
+        if ($userId) {
+            $query->orWhere('user_id', $userId);
         }
 
-        return $query->latest()
-            ->simplePaginate(10);
+        return $query->latest()->simplePaginate(10);
     }
 }
