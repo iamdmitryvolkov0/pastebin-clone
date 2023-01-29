@@ -69,7 +69,7 @@
                         </form>
                             <form action="{{route('pasteCodePage',['hash'=>$paste->hash_link, 'language'=>$paste->language])}}" method="get">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-warning mb-3">Watch as code</button>
+                                <button type="submit" class="btn btn-outline-dark mb-3">Watch as code</button>
                             </form>
                     </div>
                 </div>

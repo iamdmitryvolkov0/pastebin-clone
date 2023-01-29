@@ -20,7 +20,7 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Create generated paste every $sleepTime seconds';
 
     /**
      * Execute the console command.
@@ -29,11 +29,13 @@ class TestCommand extends Command
      */
     public function handle()
     {
+        $sleepTime=60;
+
         while (true) {
             $this->comment("Создание новой пасты");
             PastesFactory::new()->createOne();
             $this->info("Паста создана");
-            sleep(60);
+            sleep($sleepTime);
         }
     }
 

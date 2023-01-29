@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\UserRegisterAction;
+use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use Illuminate\View\View;
 
 class AuthController
 {
@@ -27,23 +27,9 @@ class AuthController
         return redirect('/');
     }
 
-    public function register(Request $request): RedirectResponse
+    public function register(CreateUserRequest $request, UserRegisterAction $action): RedirectResponse
     {
-        $data = $request->validate([
-            'name' => ['required', 'string', 'min:4'],
-            'email' => ['required', 'email', 'string', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:8']
-        ]);
-
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password'])
-        ]);
-
-        if ($user) {
-            auth('web')->login($user);
-        }
+        $action->execute($request->validated());
         return redirect('/');
     }
 }
