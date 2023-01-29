@@ -55,6 +55,12 @@ class PagesController extends Controller
                 'paste' => $action->execute($hash),
             ]);
     }
+    public function getCode(string $hash, GetSinglePasteAction $action):View
+    {
+        return view('pastes.paste_code_highlighting',[
+            'paste' => $action->execute($hash),
+        ]);
+    }
 
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {

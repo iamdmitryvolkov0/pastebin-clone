@@ -14,7 +14,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property string $body Описание
  * @property int $status Статус пасты
  * @property Carbon $created_at Время создания
- * @property Carbon $delete_at Окончание жизни пасты
+ * @property Carbon $hide_in Окончание жизни пасты
+ * @property string $language Язык подсветки синтаксиса пасты
  */
 class Paste extends Model
 {
@@ -30,7 +31,7 @@ class Paste extends Model
         'status' => PasteStatusEnum::class,
     ];
 
-    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link','hide_in'];
+    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link','hide_in','language'];
 
     protected $hidden = ['hash_link'];
 

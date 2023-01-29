@@ -12,12 +12,7 @@ class CreatePasteAction
     public function execute(array $fields): void
     {
         $hashingPhrase = $fields['title'] . Auth::id() . time();
-
-
-        if(isset($fields['hide_in'])){
-            $minutes = Carbon::now()->addMinutes($fields['hide_in']);
-        } else
-            $minutes = NULL;
+        $minutes = $fields['hide_in'] ? Carbon::now()->addMinutes($fields['hide_in']) : null;
 
         Paste::create([
             'title' => $fields['title'],

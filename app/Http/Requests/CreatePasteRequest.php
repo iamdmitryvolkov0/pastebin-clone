@@ -30,6 +30,7 @@ class CreatePasteRequest extends FormRequest
             'body' => ['required', 'string', 'min:10'],
             'status' => ['sometimes', new Enum(PasteStatusEnum::class)],
             'hide_in'=>['sometimes', 'integer'],
+            'language'=>['sometimes','string']
         ];
     }
 }

@@ -18,6 +18,10 @@
                 <input type="text" class="form-control" name="title" id="title">
             </div>
             <div class="mb-3">
+                <label class="form-label">Language</label>
+                <input type="text" class="form-control" name="language" id="language">
+            </div>
+            <div class="mb-3">
                 <label class="form-label">Description</label>
                 <textarea class="form-control" name="body" id="body"></textarea>
             </div>

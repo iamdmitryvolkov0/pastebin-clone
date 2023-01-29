@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\PasteStatusEnum;
-use App\Models\Tests\PastesFactory;
-use App\Models\Paste;
+
+use App\Actions\HideExpiredPastesAction;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -15,37 +14,32 @@ class HideExpiredPastes extends Command
      *
      * @var string
      */
-    protected $signature = 'command:hideExpiredPastes';
+    protected $signature = 'command:hide-expired-pastes';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Hide expired pastes';
+
+
 
     /**
      * Execute the console command.
      *
+     * @param HideExpiredPastesAction $action
      * @return void
      */
-    public function handle(): void
+    public function handle(HideExpiredPastesAction $action): void
     {
-        $pastes = Paste::query()->whereNot('status', PasteStatusEnum::STATUS_HIDDEN)->whereNotNull('hide_in')->get();
+        $timeSleep = 60;
 
         while (true) {
-            $this->comment("Проверка срока жизни паст");
-            foreach ($pastes as $paste) {
-                if ($paste->hide_in < Carbon::now()) {
-                    $paste->status = PasteStatusEnum::STATUS_HIDDEN;
-                    $paste->save();
-                }
-            }
+            $this->comment(Carbon::now()->format('j.m.o  H:i:s') ." | ". "Проверка срока жизни паст");
+            $action->execute();
             $this->info("Истекшие пасты cкрыты");
-            sleep('60');
+            sleep($timeSleep);
         }
-
-
     }
-
 }

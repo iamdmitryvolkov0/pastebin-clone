@@ -67,6 +67,10 @@
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             <button type="submit" class="btn btn-outline-danger mb-3">Delete</button>
                         </form>
+                            <form action="{{route('pasteCodePage',['hash'=>$paste->hash_link, 'language'=>$paste->language])}}" method="get">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-warning mb-3">Watch as code</button>
+                            </form>
                     </div>
                 </div>
 
