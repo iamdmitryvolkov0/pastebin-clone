@@ -14,7 +14,7 @@ class HideExpiredPastes extends Command
      *
      * @var string
      */
-    protected $signature = 'command:hide-expired-pastes';
+    protected $signature = 'command:hideExpiredPastes';
 
     /**
      * The console command description.
@@ -22,7 +22,6 @@ class HideExpiredPastes extends Command
      * @var string
      */
     protected $description = 'Hide expired pastes';
-
 
 
     /**
@@ -35,11 +34,10 @@ class HideExpiredPastes extends Command
     {
         $timeSleep = 60;
 
-        while (true) {
-            $this->comment(Carbon::now()->format('j.m.o  H:i:s') ." | ". "Проверка срока жизни паст");
-            $action->execute();
-            $this->info("Истекшие пасты cкрыты");
-            sleep($timeSleep);
-        }
+        $this->comment(Carbon::now()->format('j.m.o  H:i:s') . " | " . "Проверка срока жизни паст");
+        $action->execute();
+        $this->info("Истекшие пасты cкрыты");
+        sleep($timeSleep);
+
     }
 }
