@@ -1,20 +1,49 @@
-Основная функциональность:<br>
-1) <b>Возможность загрузить кусок текста ("пасту") из названия и текста</b><br>
-    1.1) загружать можно как анонимно, так и залогинившись<br>
-    1.2) можно выбрать срок в течение которого "паста" будет доступна по ссылке (expiration time)<br>
-         10мин, 1час, 3часа, 1день, 1неделя, 1месяц, без ограничения<br>
-         после окончания срока получить доступ к "пасте" нельзя<br>
-    1.3) можно указать ограничение доступа:<br>
-         - public -- доступна всем, видна в списках<br>
-         - unlisted -- доступна только по ссылке<br>
-         - private -- доступна только отправившему (только одному авторизовавшемуся пользователю -- автору)<br>
-    1.4) для загруженной пасты выдается хеш ссылка<br>
-    1.5) для пасты можно выбрать язык подсветки синтаксиса (можно не выбирать, тогда скрипт сам определит язык для подсветки) 
-2) <b>Авторизация/регистрация</b><br>
-    2.1) по логину паролю<br>
-3) <b>Возможность просмотра</b><br>
-    3.1) по ссылке<br>
-    3.2) на всех страницах блок с последними 10 public пастами<br>
-    3.3) на всех страницах залогиненный пользователь видит доп. блок с последними 10 своими пастами<br>
-    3.4) зарегистрированный пользователь имеет отдельную страницу, где видит список всех своих паст с пагинацией (например, по 10)<br>
-    3.5) все пасты, у которых вышел срок доступности, не видны никому, в том числе и автору<br>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <h1>PasteBin Simple Clone</h1>
+    <p>This project was created as a test task for PHP (Laravel) Backend developer @Atwinta </p>
+    <h2>Installation</h2>
+    <ol>
+      <li>Clone the repository to your local machine.</li>
+      <li>Install the required dependencies by running <code>composer install</code> in the project root directory.</li>
+      <li>Create a new database for the project and update the 
+        <code>DB_DATABASE</code>, 
+        <code>DB_USERNAME</code>, and 
+        <code>DB_PASSWORD</code> variables in the <code>.env</code> file with your database credentials.</li>
+      <li>Run <code>php artisan migrate</code> to create the necessary database tables.</li>
+      <li>Start the development server by running <code>php artisan serve</code>.</li>
+    </ol>
+    <h2>Main functionality</h2>
+    <p>Implemented:</p>
+    <ol>
+        <li>Ability to upload a piece of text ("paste") consisting of the <code>title</code> and <code>body</code>
+    <ul>
+        <li>Uploading is possible as anonymous or as user.</li>
+        <li>Paste has an expiration period. <br> (options: 10 min, 1 hour, 3 hours, 1 day, 1 week, 1 month, unlimited)</li>
+        <li>Paste has access limitation</li>
+        <ul>
+        <li><code>public</code> - available to everyone</li>
+        <li><code>private</code> - available to author</li>
+        <li><code>unlisted</code> - available with link only</li>
+        </ul>
+        <li>All pastes have hash link</li>
+        <li>Paste has code highlighting option <br> (if you don`t choose any, script do it automatically)</li>
+    </ul>
+        </li>
+        <li>Authorization/Registration by login (email) and password
+        </li>
+    <li>Ability to view
+    <ul>
+    <li>with link</li>
+    <li>all pages contains last 10 public pastes;</li>
+    <li>authorized user also can see his pastes;</li>
+    <li>authorized user have special page with only his pastes with pagination;</li>
+    <li>all expired pastes are hidden for everybody.</li>
+    </ul>
+    </li>
+</ol>
+</body>
