@@ -5,44 +5,43 @@
   </head>
   <body>
     <h1>PasteBin Simple Clone</h1>
-    <p>This project was created as a test task for PHP (Laravel) Backend developer @Atwinta </p>
-    <h2>Installation</h2>
+    <p>Тестовое задание на позицию PHP (Laravel) Backend developer @Atwinta </p>
+    <h2>Установка</h2>
     <ol>
-      <li>Clone the repository to your local machine.</li>
-      <li>Install the required dependencies by running <code>composer install</code> in the project root directory.</li>
-      <li>Create a new database for the project and update the 
+      <li>Клонируйте репозиторий в локальное хранилище.</li>
+      <li>Установите требуемые зависимости командой <code>composer install</code> в корневой папке проекта.</li>
+      <li>Создайте БД для проекта и обновите 
         <code>DB_DATABASE</code>, 
-        <code>DB_USERNAME</code>, and 
-        <code>DB_PASSWORD</code> variables in the <code>.env</code> file with your database credentials.</li>
-      <li>Run <code>php artisan migrate</code> to create the necessary database tables.</li>
-      <li>Start the development server by running <code>php artisan serve</code>.</li>
+        <code>DB_USERNAME</code>, и 
+        <code>DB_PASSWORD</code> переменные в <code>.env</code> файле, с учетом ваших данных.</li>
+      <li>Выполните миграции <code>php artisan migrate</code>, чтобы создать в БД необходимые таблицы.</li>
+      <li>Запустите сервер командой <code>php artisan serve</code>.</li>
     </ol>
-    <h2>Main functionality</h2>
-    <p>Implemented:</p>
+    <h2>Основная функциональность</h2>
+    <p>Реализовано:</p>
     <ol>
-        <li>Ability to upload a piece of text ("paste") consisting of the <code>title</code> and <code>body</code>
+        <li>Возможность загрузить фрагмент текста ("пасту"), состоящую из <code>title</code> и <code>body</code>
     <ul>
-        <li>Uploading is possible as anonymous or as user.</li>
-        <li>Paste has an expiration period. <br> (options: 10 min, 1 hour, 3 hours, 1 day, 1 week, 1 month, unlimited)</li>
-        <li>Paste has access limitation</li>
+        <li>Загрузка паст возможна анонимно и с авторизацией.</li>
+        <li>У пасты есть срок жизни. <br> (опции: 10 минут, 1 час, 3 часа, 1 день, 1 неделя, 1 месяц, бессрочно)</li>
+        <li>У паст есть уровни доступа:</li>
         <ul>
-        <li><code>public</code> - available to everyone</li>
-        <li><code>private</code> - available to author</li>
-        <li><code>unlisted</code> - available with link only</li>
+        <li><code>public</code> - доступна всем</li>
+        <li><code>private</code> - доступна автору</li>
+        <li><code>unlisted</code> - доступна только по ссылке</li>
         </ul>
-        <li>All pastes have hash link</li>
-        <li>Paste has code highlighting option <br> (if you don`t choose any, script do it automatically)</li>
+        <li>У всех паст есть хеш-ссылка.</li>
+        <li>У паст есть возможность выделять синтаксис языков программирования <br> (если не выбирать язык, скрипт сам определит его).</li>
     </ul>
         </li>
-        <li>Authorization/Registration by login (email) and password
+        <li>Авторизация/регистрация по логину и паролю
         </li>
-    <li>Ability to view
+    <li>Возожность просматривать
     <ul>
-    <li>with link</li>
-    <li>all pages contains last 10 public pastes;</li>
-    <li>authorized user also can see his pastes;</li>
-    <li>authorized user have special page with only his pastes with pagination;</li>
-    <li>all expired pastes are hidden for everybody.</li>
+    <li>по ссылке;</li>
+    <li>страница отображения всех паст с пагинацией по 10;</li>
+    <li>страница с пастами автора (для авторизованных пользователей);</li>
+    <li>все истекшие пасты скрыты для просмотра, но хранятся в БД.</li>
     </ul>
     </li>
 </ol>
