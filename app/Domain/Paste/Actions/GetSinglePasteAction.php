@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Actions;
+namespace App\Domain\Paste\Actions;
 
 use App\Models\Paste;
 use Illuminate\Database\Eloquent\Builder;

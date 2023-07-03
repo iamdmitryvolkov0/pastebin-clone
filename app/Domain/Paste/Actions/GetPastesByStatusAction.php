@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Actions;
+namespace App\Domain\Paste\Actions;
 
 use App\Enums\PasteStatusEnum;
 use App\Models\Paste;

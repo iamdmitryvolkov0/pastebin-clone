@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Actions\CreatePasteAction;
-use App\Domain\Actions\DeletePasteAction;
-use App\Domain\Actions\GetAllPastesAction;
-use App\Domain\Actions\GetPastesByStatusAction;
-use App\Domain\Actions\GetSinglePasteAction;
-use App\Domain\Actions\UpdatePasteAction;
+use App\Domain\Paste\Actions\CreatePasteAction;
+use App\Domain\Paste\Actions\DeletePasteAction;
+use App\Domain\Paste\Actions\GetAllPastesAction;
+use App\Domain\Paste\Actions\GetPastesByStatusAction;
+use App\Domain\Paste\Actions\GetSinglePasteAction;
+use App\Domain\Paste\Actions\UpdatePasteAction;
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
 use Illuminate\Http\RedirectResponse;
