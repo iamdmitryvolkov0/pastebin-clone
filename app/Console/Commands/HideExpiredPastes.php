@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 
-use App\Actions\HideExpiredPastesAction;
+use App\Domain\Actions\HideExpiredPastesAction;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

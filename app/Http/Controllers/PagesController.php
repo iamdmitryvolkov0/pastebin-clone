@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\DeletePasteAction;
-use App\Actions\GetSinglePasteAction;
-use App\Actions\UpdatePasteAction;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use App\Actions\GetAllPastesAction;
-use Illuminate\Support\Facades\Auth;
+use App\Domain\Actions\CreatePasteAction;
+use App\Domain\Actions\DeletePasteAction;
+use App\Domain\Actions\GetAllPastesAction;
+use App\Domain\Actions\GetPastesByStatusAction;
+use App\Domain\Actions\GetSinglePasteAction;
+use App\Domain\Actions\UpdatePasteAction;
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
 use Illuminate\Http\RedirectResponse;
-use App\Actions\GetPastesByStatusAction;
-use App\Actions\CreatePasteAction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 
 class PagesController extends Controller

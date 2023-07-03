@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Actions;
+namespace App\Domain\Actions;
 
 use App\Models\Paste;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
 
 class CreatePasteAction
 {

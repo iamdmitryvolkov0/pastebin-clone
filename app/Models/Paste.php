@@ -35,7 +35,7 @@ class Paste extends Model
 
     protected $hidden = ['hash_link'];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'hash_link';
     }
