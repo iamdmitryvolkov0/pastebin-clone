@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 
 use App\Domain\Paste\Actions\HideExpiredPastesAction;
+use App\Repositories\Contracts\PasteRepositoryContract;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -26,16 +27,16 @@ class HideExpiredPastes extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param HideExpiredPastesAction $action
+     * Hide expired Pastes after lifetime check
+     * @param PasteRepositoryContract $pasteRepository
      * @return void
      */
-    public function handle(HideExpiredPastesAction $action): void
+    public function handle(PasteRepositoryContract $pasteRepository): void
     {
         $timeSleep = 60;
 
         $this->comment(Carbon::now()->format('j.m.o  H:i:s') . " | " . "Проверка срока жизни паст");
-        $action->execute();
+        $pasteRepository->hideExpired();
         $this->info("Истекшие пасты cкрыты");
         sleep($timeSleep);
 

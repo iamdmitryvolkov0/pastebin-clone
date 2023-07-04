@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Paste\Actions\CreatePasteAction;
-use App\Domain\Paste\Actions\DeletePasteAction;
-use App\Domain\Paste\Actions\UpdatePasteAction;
+
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
 use App\Repositories\Contracts\PasteRepositoryContract;
@@ -14,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 
-class PagesController extends Controller
+class PastesController extends Controller
 {
     /**
      * Get all Pastes
@@ -79,15 +77,23 @@ class PagesController extends Controller
     }
 
     /**
+     * Show Paste create form
+     * @return View
+     */
+    public function create(): View
+    {
+        return view('pastes.pastes_create_form');
+    }
+
+    /**
      * Create Paste
      * @param CreatePasteRequest $request
-     * @param CreatePasteAction $action
+     * @param PasteRepositoryContract $pasteRepository
      * @return RedirectResponse
      */
-    public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
+    public function store(CreatePasteRequest $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
-        //TODO:refactor
-        $action->execute($request->validated());
+        $pasteRepository->create($request->validated());
 
         return redirect(route('all'));
     }
@@ -95,27 +101,27 @@ class PagesController extends Controller
     /**
      * Delete single Paste
      * @param Request $request
-     * @param DeletePasteAction $action
+     * @param PasteRepositoryContract $pasteRepository
      * @return RedirectResponse
      */
-    public function delete(Request $request, DeletePasteAction $action): RedirectResponse
+    public function delete (Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
-        //TODO:refactor
-        $action->execute($request->id);
+        $id = $request['id'];
+        $pasteRepository->deleteById($id);
 
         return redirect(route('all'));
     }
 
     /**
-     * Update Paste info
+     * Update Paste status to private
      * @param Request $request
-     * @param UpdatePasteAction $action
+     * @param PasteRepositoryContract $pasteRepository
      * @return RedirectResponse
      */
-    public function update(Request $request, UpdatePasteAction $action): RedirectResponse
+    public function update(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
-        //TODO:refactor
-        $action->execute($request->id);
+        $id = $request['id'];
+        $pasteRepository->updateStatus($id);
 
         return redirect(route('all'));
     }

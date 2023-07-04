@@ -9,7 +9,7 @@ class PastesFactory extends Factory
 {
     protected $model = Paste::class;
 
-    public function definition()
+    public function definition(): array
     {
         $hash=bcrypt($this->faker->text);
         return [

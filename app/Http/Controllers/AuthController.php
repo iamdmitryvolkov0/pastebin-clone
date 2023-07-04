@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\User\Actions\UserRegisterAction;
 use App\Http\Requests\CreateUserRequest;
+use App\Repositories\Contracts\UserRepositoryContract;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController
 {
-    public function login(Request $request)
+    public function login(Request $request): Redirector|Application|RedirectResponse
     {
         $credentials = $request->only('email', 'password');
 
@@ -23,13 +25,12 @@ class AuthController
     public function logout(): RedirectResponse
     {
         Auth::logout();
-
-        return redirect('/');
+        return redirect(route('all'));
     }
 
-    public function register(CreateUserRequest $request, UserRegisterAction $action): RedirectResponse
+    public function register(CreateUserRequest $request, UserRepositoryContract $userRepository): RedirectResponse
     {
-        $action->execute($request->validated());
-        return redirect('/');
+        $userRepository->register($request->validated());
+        return redirect(route('all'));
     }
 }

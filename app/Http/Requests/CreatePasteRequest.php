@@ -13,7 +13,7 @@ class CreatePasteRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,11 +23,11 @@ class CreatePasteRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'min:10'],
-            'body' => ['required', 'string', 'min:10'],
+            'title' => ['required', 'string', 'min:5'],
+            'body' => ['required', 'string', 'min:5'],
             'status' => ['sometimes', new Enum(PasteStatusEnum::class)],
             'hide_in' => ['sometimes', 'integer', 'nullable'],
             'language' => ['sometimes', 'string', 'nullable']

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('title',255)->nullable();
             $table->text('body')->nullable();
             $table->integer('status')->default(PasteStatusEnum::STATUS_PUBLIC->value);
-            $table->string('language',32)->default("language-plaintext");
+            $table->string('language',32)->nullable();
             $table->timestamps();
             $table->timestamp('hide_in')->nullable();
             $table->string('hash_link')->unique();

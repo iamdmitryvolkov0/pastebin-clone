@@ -26,7 +26,6 @@ class Paste extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-
     protected $casts = [
         'status' => PasteStatusEnum::class,
     ];
