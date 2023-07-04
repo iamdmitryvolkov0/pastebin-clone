@@ -32,6 +32,8 @@ Route::post('/update', [PastesController::class, 'update'])->name('update');
 Route::get('/login', [AuthFormsController::class, 'login'])->name('login');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::get('/sign-in/github', [AuthController::class, 'github'])->name('github');
+Route::get('/sign-in/github/redirect', [AuthController::class, 'githubRedirect'])->name('githubRedirect');
 
 Route::get('/register', [AuthFormsController::class, 'register'])->name('register');
 Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
