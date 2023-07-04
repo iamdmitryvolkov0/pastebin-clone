@@ -47,7 +47,6 @@ class AuthController
     public function githubRedirect()//: RedirectResponse
     {
         $user = Socialite::driver('github')->user();
-        dd($user);
         $user = User::firstOrCreate([
             'email' => $user['email']
         ],[
