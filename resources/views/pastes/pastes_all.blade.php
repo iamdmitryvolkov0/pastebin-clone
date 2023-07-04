@@ -36,7 +36,7 @@
                 {{--Блок с пастами --}}
                 <div class="list-group mt-3 mb-3">
                     {{--Блок с каждой отдельной пастой и ссылкой--}}
-                    <a href="{{route('pastePage', ['hash'=>$paste->hash_link])}}"
+                    <a href="{{route('pastePage', ['hash'=>$paste->hash_link,'language'=>$paste->language])}}"
                        class="list-group-item list-group-item-action flex-column align-items-start">
                         <small class="d-flex flex-row-reverse">by {{$paste->author?->name ??'Anonimous'}}</small>
                         <input type="hidden" name="id" value="{{$paste->id}}">
@@ -67,10 +67,6 @@
                             <input type="hidden" name="id" value="{{$paste->id}}">
                             <button type="submit" class="btn btn-outline-danger mb-3">Delete</button>
                         </form>
-                            <form action="{{route('pasteCodePage',['hash'=>$paste->hash_link, 'language'=>$paste->language])}}" method="get">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-dark mb-3">Watch as code</button>
-                            </form>
                     </div>
                 </div>
 

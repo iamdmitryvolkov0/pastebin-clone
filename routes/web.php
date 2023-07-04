@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PastesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthFormsController;
-use App\Http\Controllers\PastesFormsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -18,19 +17,17 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [PagesController::class, 'all'])->name('all');
-Route::get('/public', [PagesController::class, 'public'])->name('public');
-Route::get('/private', [PagesController::class, 'private'])->middleware('auth')->name('private');
-Route::get('/paste/{hash}', [PagesController::class, 'get'])->name('pastePage');
-Route::get('/paste/code/{hash}', [PagesController::class, 'getCode'])->name('pasteCodePage');
-Route::get('/create', [PastesFormsController::class, 'create'])->name('create');
-Route::get('/user_pastes', [PagesController::class, 'userPastes'])->middleware('auth')->name('userPastes');
+Route::get('/', [PastesController::class, 'all'])->name('all');
+Route::get('/public', [PastesController::class, 'public'])->name('public');
+Route::get('/private', [PastesController::class, 'private'])->middleware('auth')->name('private');
+Route::get('/paste/{hash}', [PastesController::class, 'get'])->name('pastePage');
+Route::get('/create', [PastesController::class, 'create'])->name('create');
+Route::get('/user_pastes', [PastesController::class, 'userPastes'])->middleware('auth')->name('userPastes');
 Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 
-Route::post('/store', [PagesController::class, 'store'])->name('store');
-Route::post('/delete', [PagesController::class, 'delete'])->name('delete');
-Route::post('/update', [PagesController::class, 'update'])->name('update');
-
+Route::post('/store', [PastesController::class, 'store'])->name('store');
+Route::post('/delete', [PastesController::class, 'delete'])->name('delete');
+Route::post('/update', [PastesController::class, 'update'])->name('update');
 
 
 Route::get('/login', [AuthFormsController::class, 'login'])->name('login');

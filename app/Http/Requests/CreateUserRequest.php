@@ -11,7 +11,7 @@ class CreateUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,12 +21,12 @@ class CreateUserRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'min:4'],
             'email' => ['required', 'email', 'string', 'unique:users'],
-            'password' => ['required', 'confirmed', 'min:8']
+            'password' => ['required', 'confirmed', 'min:4']
         ];
     }
 }

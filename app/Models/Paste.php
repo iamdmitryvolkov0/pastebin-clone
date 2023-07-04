@@ -26,7 +26,6 @@ class Paste extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-
     protected $casts = [
         'status' => PasteStatusEnum::class,
     ];
@@ -35,7 +34,7 @@ class Paste extends Model
 
     protected $hidden = ['hash_link'];
 
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'hash_link';
     }

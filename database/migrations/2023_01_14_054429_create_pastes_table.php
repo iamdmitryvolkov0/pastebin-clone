@@ -12,7 +12,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('pastes', function (Blueprint $table) {
             $table->id();
@@ -21,8 +21,12 @@ return new class extends Migration
             $table->integer('status')->default(PasteStatusEnum::STATUS_PUBLIC->value);
             $table->string('language',32)->nullable();
             $table->timestamps();
+            $table->timestamp('hide_in')->nullable();
+            $table->string('hash_link')->unique();
 
-            $table->foreignId('user_id')->nullable()->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->nullable()->references('id')->on('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
@@ -31,7 +35,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('pastes');
     }
