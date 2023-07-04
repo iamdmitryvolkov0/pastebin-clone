@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 
-use App\Domain\Paste\Actions\HideExpiredPastesAction;
 use App\Repositories\Contracts\PasteRepositoryContract;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
