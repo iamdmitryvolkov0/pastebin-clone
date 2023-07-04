@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PastesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthFormsController;
+use App\Http\Controllers\PastesController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +29,9 @@ Route::post('/store', [PastesController::class, 'store'])->name('store');
 Route::post('/delete', [PastesController::class, 'delete'])->name('delete');
 Route::post('/update', [PastesController::class, 'update'])->name('update');
 
-
 Route::get('/login', [AuthFormsController::class, 'login'])->name('login');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('/register', [AuthFormsController::class, 'register'])->name('register');
 Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
-
-

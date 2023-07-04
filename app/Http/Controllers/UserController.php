@@ -7,10 +7,10 @@ use Illuminate\View\View;
 
 class UserController
 {
-    public function profile():View
+    public function profile(): View
     {
         return view('auth.profile', [
-            'user' => Auth::user()
+            'user' => Auth::user(),
         ]);
     }
 }

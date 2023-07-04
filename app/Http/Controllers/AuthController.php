@@ -19,18 +19,21 @@ class AuthController
         if (Auth::attempt($credentials)) {
             return redirect(route('all'));
         }
+
         return redirect(route('login'));
     }
 
     public function logout(): RedirectResponse
     {
         Auth::logout();
+
         return redirect(route('all'));
     }
 
     public function register(CreateUserRequest $request, UserRepositoryContract $userRepository): RedirectResponse
     {
         $userRepository->register($request->validated());
+
         return redirect(route('all'));
     }
 }

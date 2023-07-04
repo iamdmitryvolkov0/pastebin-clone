@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\PasteStatusEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Enums\PasteStatusEnum;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -30,7 +30,7 @@ class Paste extends Model
         'status' => PasteStatusEnum::class,
     ];
 
-    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link','hide_in','language'];
+    protected $fillable = ['title', 'body', 'status', 'user_id', 'hash_link', 'hide_in', 'language'];
 
     protected $hidden = ['hash_link'];
 

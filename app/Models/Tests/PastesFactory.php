@@ -11,7 +11,8 @@ class PastesFactory extends Factory
 
     public function definition(): array
     {
-        $hash=bcrypt($this->faker->text);
+        $hash = bcrypt($this->faker->text);
+
         return [
             'title' => $this->faker->text,
             'body' => $this->faker->unique()->text,

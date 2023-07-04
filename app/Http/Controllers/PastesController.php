@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
 use App\Repositories\Contracts\PasteRepositoryContract;
@@ -11,12 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
-
 class PastesController extends Controller
 {
     /**
      * Get all Pastes
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return View
      */
     public function all(PasteRepositoryContract $pasteRepository): View
@@ -28,7 +27,7 @@ class PastesController extends Controller
     }
 
     /** Get public Pastes list
-     * @param PasteRepositoryContract $pasteRepository
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return View
      */
     public function public(PasteRepositoryContract $pasteRepository): View
@@ -39,34 +38,36 @@ class PastesController extends Controller
     }
 
     /** Get private Pastes list
-     * @param PasteRepositoryContract $pasteRepository
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return View
      */
     public function private(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_private', [
             'pastes_private' => $pasteRepository->getByStatus(PasteStatusEnum::STATUS_PRIVATE),
-            'user' => Auth::user()
+            'user' => Auth::user(),
         ]);
     }
 
     /**
      * Get Pastes list by User
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return View
      */
     public function userPastes(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_by_author', [
             'pastes' => $pasteRepository->get(),
-            'user' => Auth::user()
+            'user' => Auth::user(),
         ]);
     }
 
     /**
      * Get single Paste
-     * @param string $hash
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  string  $hash
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return View
      */
     public function get(string $hash, PasteRepositoryContract $pasteRepository): View
@@ -78,6 +79,7 @@ class PastesController extends Controller
 
     /**
      * Show Paste create form
+     *
      * @return View
      */
     public function create(): View
@@ -87,8 +89,9 @@ class PastesController extends Controller
 
     /**
      * Create Paste
-     * @param CreatePasteRequest $request
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  CreatePasteRequest  $request
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return RedirectResponse
      */
     public function store(CreatePasteRequest $request, PasteRepositoryContract $pasteRepository): RedirectResponse
@@ -100,11 +103,12 @@ class PastesController extends Controller
 
     /**
      * Delete single Paste
-     * @param Request $request
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  Request  $request
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return RedirectResponse
      */
-    public function delete (Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
+    public function delete(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
         $id = $request['id'];
         $pasteRepository->deleteById($id);
@@ -114,8 +118,9 @@ class PastesController extends Controller
 
     /**
      * Update Paste status to private
-     * @param Request $request
-     * @param PasteRepositoryContract $pasteRepository
+     *
+     * @param  Request  $request
+     * @param  PasteRepositoryContract  $pasteRepository
      * @return RedirectResponse
      */
     public function update(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse

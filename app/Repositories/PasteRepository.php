@@ -16,8 +16,8 @@ class PasteRepository implements Contracts\PasteRepositoryContract
 {
     public function create(array $data): void
     {
-        $hashingPhrase = $data['title'] . Auth::id() . time();
-        $minutes = isset($data['hide_in']) ? Carbon::now()->addMinutes($data['hide_in']) : NULL;
+        $hashingPhrase = $data['title'].Auth::id().time();
+        $minutes = isset($data['hide_in']) ? Carbon::now()->addMinutes($data['hide_in']) : null;
         $language = $data['language'] ?: null;
 
         $createData = [
@@ -27,7 +27,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
             'user_id' => Auth::id(),
             'hash_link' => Hash::make($hashingPhrase),
             'hide_in' => $minutes,
-            'language' => $language??'language-plaintext'
+            'language' => $language ?? 'language-plaintext',
         ];
 
         Paste::create($createData);
@@ -67,7 +67,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
             ->update(['status' => PasteStatusEnum::STATUS_HIDDEN]);
     }
 
-    public function updateStatus(int $id):void
+    public function updateStatus(int $id): void
     {
         $paste = Paste::findOrFail($id);
         $paste->status = PasteStatusEnum::STATUS_PRIVATE;

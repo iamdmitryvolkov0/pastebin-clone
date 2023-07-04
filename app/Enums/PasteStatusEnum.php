@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Enums;
+
 enum PasteStatusEnum: int
 {
     case STATUS_PUBLIC = 0;

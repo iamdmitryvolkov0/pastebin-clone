@@ -4,10 +4,9 @@ namespace App\Repositories\Contracts;
 
 use App\Enums\PasteStatusEnum;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-
 
 interface PasteRepositoryContract
 {
@@ -21,8 +20,7 @@ interface PasteRepositoryContract
 
     public function hideExpired(): void;
 
-    public function updateStatus(int $id):void;
+    public function updateStatus(int $id): void;
 
     public function deleteById(int $id): void;
-
 }
