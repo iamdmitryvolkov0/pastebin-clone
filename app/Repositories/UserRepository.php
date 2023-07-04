@@ -17,7 +17,6 @@ class UserRepository implements Contracts\UserRepositoryContract
         ]);
         if ($user) {
             Auth::login($user);
-//            auth('web')->login($user);
         }
     }
 }
