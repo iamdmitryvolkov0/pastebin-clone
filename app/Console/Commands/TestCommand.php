@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Tests\PastesFactory;
-use App\Models\Paste;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -29,14 +28,13 @@ class TestCommand extends Command
      */
     public function handle()
     {
-        $sleepTime=60;
+        $sleepTime = 60;
 
         while (true) {
-            $this->comment("Создание новой пасты");
+            $this->comment('Создание новой пасты');
             PastesFactory::new()->createOne();
-            $this->info("Паста создана");
+            $this->info('Паста создана');
             sleep($sleepTime);
         }
     }
-
 }

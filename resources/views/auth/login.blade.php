@@ -35,5 +35,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
+
+        <a href="{{route('github')}}" class="btn btn-dark mt-3">Login wia GitHub</a>
     </div>
 @endsection
