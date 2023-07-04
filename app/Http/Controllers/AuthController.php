@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\User\UserRegisterAction;
+use App\Domain\User\Actions\UserRegisterAction;
 use App\Http\Requests\CreateUserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

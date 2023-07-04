@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Domain\Paste\Actions\CreatePasteAction;
 use App\Domain\Paste\Actions\DeletePasteAction;
-use App\Domain\Paste\Actions\GetAllPastesAction;
-use App\Domain\Paste\Actions\GetPastesByStatusAction;
-use App\Domain\Paste\Actions\GetSinglePasteAction;
 use App\Domain\Paste\Actions\UpdatePasteAction;
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
+use App\Repositories\Contracts\PasteRepositoryContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,66 +16,105 @@ use Illuminate\View\View;
 
 class PagesController extends Controller
 {
-    public function all(GetAllPastesAction $action): View
+    /**
+     * Get all Pastes
+     * @param PasteRepositoryContract $pasteRepository
+     * @return View
+     */
+    public function all(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_all', [
-            'pastes' => $action->execute(),
-            'user' => Auth::user()
+            'pastes' => $pasteRepository->get(),
+            'user' => Auth::user(),
         ]);
     }
 
-    public function public(GetPastesByStatusAction $action): View
+    /** Get public Pastes list
+     * @param PasteRepositoryContract $pasteRepository
+     * @return View
+     */
+    public function public(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_public', [
-            'pastes_public' => $action->execute(PasteStatusEnum::STATUS_PUBLIC)
+            'pastes_public' => $pasteRepository->getByStatus(PasteStatusEnum::STATUS_PUBLIC),
         ]);
     }
 
-    public function private(GetPastesByStatusAction $action): View
+    /** Get private Pastes list
+     * @param PasteRepositoryContract $pasteRepository
+     * @return View
+     */
+    public function private(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_private', [
-            'pastes_private' => $action->execute(PasteStatusEnum::STATUS_PRIVATE),
+            'pastes_private' => $pasteRepository->getByStatus(PasteStatusEnum::STATUS_PRIVATE),
             'user' => Auth::user()
         ]);
     }
 
-    public function userPastes(GetAllPastesAction $action): View
+    /**
+     * Get Pastes list by User
+     * @param PasteRepositoryContract $pasteRepository
+     * @return View
+     */
+    public function userPastes(PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.pastes_by_author', [
-            'pastes' => $action->execute(),
+            'pastes' => $pasteRepository->get(),
             'user' => Auth::user()
         ]);
     }
 
-    public function get(string $hash, GetSinglePasteAction $action): View
+    /**
+     * Get single Paste
+     * @param string $hash
+     * @param PasteRepositoryContract $pasteRepository
+     * @return View
+     */
+    public function get(string $hash, PasteRepositoryContract $pasteRepository): View
     {
         return view('pastes.paste_page', [
-                'paste' => $action->execute($hash),
-            ]);
-    }
-    public function getCode(string $hash, GetSinglePasteAction $action):View
-    {
-        return view('pastes.paste_code_highlighting',[
-            'paste' => $action->execute($hash),
+            'paste' => $pasteRepository->getSingle($hash),
         ]);
     }
 
+    /**
+     * Create Paste
+     * @param CreatePasteRequest $request
+     * @param CreatePasteAction $action
+     * @return RedirectResponse
+     */
     public function store(CreatePasteRequest $request, CreatePasteAction $action): RedirectResponse
     {
+        //TODO:refactor
         $action->execute($request->validated());
 
         return redirect(route('all'));
     }
 
+    /**
+     * Delete single Paste
+     * @param Request $request
+     * @param DeletePasteAction $action
+     * @return RedirectResponse
+     */
     public function delete(Request $request, DeletePasteAction $action): RedirectResponse
     {
+        //TODO:refactor
         $action->execute($request->id);
 
         return redirect(route('all'));
     }
 
+    /**
+     * Update Paste info
+     * @param Request $request
+     * @param UpdatePasteAction $action
+     * @return RedirectResponse
+     */
     public function update(Request $request, UpdatePasteAction $action): RedirectResponse
     {
+        //TODO:refactor
         $action->execute($request->id);
 
         return redirect(route('all'));
