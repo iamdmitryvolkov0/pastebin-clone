@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Gravatar;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Password;
@@ -57,6 +58,10 @@ class User extends Resource
                 ->rules('required', 'email', 'max:254')
                 ->creationRules('unique:users,email')
                 ->updateRules('unique:users,email,{{resourceId}}'),
+
+            Boolean::make('is_banned')
+                ->sortable()
+                ->updateRules('bool'),
 
             Password::make('Password')
                 ->onlyOnForms()
