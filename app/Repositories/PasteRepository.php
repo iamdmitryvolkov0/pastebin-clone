@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Enums\PasteStatusEnum;
 use App\Models\Paste;
+use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -78,5 +79,14 @@ class PasteRepository implements Contracts\PasteRepositoryContract
     {
         $paste = Paste::query()->findOrFail($id);
         $paste->delete();
+    }
+
+    public function reportById(int $id):void
+    {
+        $paste = Paste::query()->findOrFail($id);
+        $report = new Report();
+        $report->paste_id = $paste->id;
+        $report->reason = request('reason');
+        $report->save();
     }
 }

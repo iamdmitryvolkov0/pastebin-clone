@@ -62,6 +62,15 @@
                             </form>
                         @endif
 
+                            <form action="{{route('report',['hash'=>$paste->id])}}" method="post">
+                                @csrf
+                                <input type="hidden" name="id" value="{{$paste->id}}">
+                                <label>
+                                    <textarea name="reason" placeholder="Причина жалобы"></textarea>
+                                </label>
+                                <button type="submit" class="btn btn-outline-warning mb-3">Report</button>
+                            </form>
+
                         <form action="{{route('delete')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$paste->id}}">

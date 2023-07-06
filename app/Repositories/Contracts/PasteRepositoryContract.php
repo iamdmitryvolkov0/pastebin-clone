@@ -23,4 +23,6 @@ interface PasteRepositoryContract
     public function updateStatus(int $id): void;
 
     public function deleteById(int $id): void;
+
+    public function reportById(int $id):void;
 }
