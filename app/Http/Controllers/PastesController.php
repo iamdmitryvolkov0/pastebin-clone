@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\PasteStatusEnum;
 use App\Http\Requests\CreatePasteRequest;
+use App\Models\Paste;
 use App\Repositories\Contracts\PasteRepositoryContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -127,6 +128,14 @@ class PastesController extends Controller
     {
         $id = $request['id'];
         $pasteRepository->updateStatus($id);
+
+        return redirect(route('all'));
+    }
+
+    public function report(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
+    {
+        $id = $request['id'];
+        $pasteRepository->reportById($id);
 
         return redirect(route('all'));
     }

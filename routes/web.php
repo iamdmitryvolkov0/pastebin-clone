@@ -28,6 +28,8 @@ Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->
 Route::post('/store', [PastesController::class, 'store'])->name('store');
 Route::post('/delete', [PastesController::class, 'delete'])->name('delete');
 Route::post('/update', [PastesController::class, 'update'])->name('update');
+Route::post('/paste/{hash}/report', [PastesController::class, 'report'])->name('report')->middleware('auth');
+
 
 Route::get('/login', [AuthFormsController::class, 'login'])->name('login');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
