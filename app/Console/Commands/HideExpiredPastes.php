@@ -25,9 +25,6 @@ class HideExpiredPastes extends Command
     /**
      * Execute the console command.
      * Hide expired Pastes after lifetime check
-     *
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return void
      */
     public function handle(PasteRepositoryContract $pasteRepository): void
     {

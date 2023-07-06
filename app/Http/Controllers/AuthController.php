@@ -48,13 +48,14 @@ class AuthController
     {
         $user = Socialite::driver('github')->user();
         $user = User::firstOrCreate([
-            'email' => $user['email']
+            'email' => $user['email'],
         ], [
             'name' => $user['name'],
             'password' => Hash::make(Str::random(10)),
         ]);
 
         Auth::login($user);
+
         return redirect(route('all'));
     }
 

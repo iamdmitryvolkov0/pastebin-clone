@@ -15,9 +15,6 @@ class PastesController extends Controller
 {
     /**
      * Get all Pastes
-     *
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return View
      */
     public function all(PasteRepositoryContract $pasteRepository): View
     {
@@ -28,8 +25,6 @@ class PastesController extends Controller
     }
 
     /** Get public Pastes list
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return View
      */
     public function public(PasteRepositoryContract $pasteRepository): View
     {
@@ -39,8 +34,6 @@ class PastesController extends Controller
     }
 
     /** Get private Pastes list
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return View
      */
     public function private(PasteRepositoryContract $pasteRepository): View
     {
@@ -52,9 +45,6 @@ class PastesController extends Controller
 
     /**
      * Get Pastes list by User
-     *
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return View
      */
     public function userPastes(PasteRepositoryContract $pasteRepository): View
     {
@@ -66,10 +56,6 @@ class PastesController extends Controller
 
     /**
      * Get single Paste
-     *
-     * @param  string  $hash
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return View
      */
     public function get(string $hash, PasteRepositoryContract $pasteRepository): View
     {
@@ -80,8 +66,6 @@ class PastesController extends Controller
 
     /**
      * Show Paste create form
-     *
-     * @return View
      */
     public function create(): View
     {
@@ -90,10 +74,6 @@ class PastesController extends Controller
 
     /**
      * Create Paste
-     *
-     * @param  CreatePasteRequest  $request
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return RedirectResponse
      */
     public function store(CreatePasteRequest $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
@@ -104,10 +84,6 @@ class PastesController extends Controller
 
     /**
      * Delete single Paste
-     *
-     * @param  Request  $request
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return RedirectResponse
      */
     public function delete(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {
@@ -119,10 +95,6 @@ class PastesController extends Controller
 
     /**
      * Update Paste status to private
-     *
-     * @param  Request  $request
-     * @param  PasteRepositoryContract  $pasteRepository
-     * @return RedirectResponse
      */
     public function update(Request $request, PasteRepositoryContract $pasteRepository): RedirectResponse
     {

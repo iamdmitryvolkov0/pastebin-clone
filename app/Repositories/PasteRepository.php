@@ -81,7 +81,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
         $paste->delete();
     }
 
-    public function reportById(int $id):void
+    public function reportById(int $id): void
     {
         $paste = Paste::query()->findOrFail($id);
         $report = new Report();

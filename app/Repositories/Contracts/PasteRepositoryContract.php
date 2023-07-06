@@ -24,5 +24,5 @@ interface PasteRepositoryContract
 
     public function deleteById(int $id): void;
 
-    public function reportById(int $id):void;
+    public function reportById(int $id): void;
 }
