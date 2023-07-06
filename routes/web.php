@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PastesController::class, 'all'])->name('all');
 Route::get('/public', [PastesController::class, 'public'])->name('public');
-Route::get('/private', [PastesController::class, 'private'])->middleware('auth')->name('private');
+Route::get('/private', [PastesController::class, 'private'])->middleware('auth')->middleware('banned')->name('private');
 Route::get('/paste/{hash}', [PastesController::class, 'get'])->name('pastePage');
-Route::get('/create', [PastesController::class, 'create'])->name('create');
+Route::get('/create', [PastesController::class, 'create'])->name('create')->middleware('banned');
 Route::get('/user_pastes', [PastesController::class, 'userPastes'])->middleware('auth')->name('userPastes');
 Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->name('profile');
 
@@ -37,3 +37,5 @@ Route::get('/sign-in/github/redirect', [AuthController::class, 'githubRedirect']
 
 Route::get('/register', [AuthFormsController::class, 'register'])->name('register');
 Route::post('/register_process', [AuthController::class, 'register'])->name('register_process');
+
+Route::get('/banned', [AuthController::class, 'banned'])->name('banned');

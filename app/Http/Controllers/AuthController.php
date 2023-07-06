@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthController
@@ -17,7 +18,6 @@ class AuthController
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
             return redirect(route('all'));
         }
@@ -49,12 +49,17 @@ class AuthController
         $user = Socialite::driver('github')->user();
         $user = User::firstOrCreate([
             'email' => $user['email']
-        ],[
+        ], [
             'name' => $user['name'],
             'password' => Hash::make(Str::random(10)),
         ]);
 
         Auth::login($user);
         return redirect(route('all'));
+    }
+
+    public function banned(): View
+    {
+        return view('auth.banned');
     }
 }
