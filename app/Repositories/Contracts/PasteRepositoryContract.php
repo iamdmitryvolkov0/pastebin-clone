@@ -10,13 +10,15 @@ use Illuminate\Database\Eloquent\Model;
 
 interface PasteRepositoryContract
 {
-    public function create(array $data): void;
+    public function create(array $data): array;
 
     public function get(): Paginator;
 
     public function getByStatus(PasteStatusEnum $status): Collection;
 
     public function getSingle(string $hash): Model|Builder;
+
+    public function getById(int $id);
 
     public function hideExpired(): void;
 

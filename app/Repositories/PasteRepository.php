@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Hash;
 
 class PasteRepository implements Contracts\PasteRepositoryContract
 {
-    public function create(array $data): void
+    public function create(array $data): array
     {
-        $hashingPhrase = $data['title'].Auth::id().time();
+        $hashingPhrase = $data['title'] . Auth::id() . time();
         $minutes = isset($data['hide_in']) ? Carbon::now()->addMinutes($data['hide_in']) : null;
         $language = $data['language'] ?: null;
 
@@ -31,7 +31,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
             'language' => $language ?? 'language-plaintext',
         ];
 
-        Paste::create($createData);
+        return Paste::create($createData);
     }
 
     public function get(): Paginator
@@ -57,6 +57,11 @@ class PasteRepository implements Contracts\PasteRepositoryContract
     public function getSingle(string $hash): Model|Builder
     {
         return Paste::query()->where('hash_link', $hash)->firstOrFail();
+    }
+
+    public function getById(int $id): Model|Builder
+    {
+        return Paste::query()->where('id', $id)->firstOrFail();
     }
 
     public function hideExpired(): void

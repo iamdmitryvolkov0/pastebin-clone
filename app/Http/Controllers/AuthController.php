@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
-use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryContract;
+use App\Services\Contracts\UserServiceContract;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\View\View;
-use Laravel\Socialite\Facades\Socialite;
 
 class AuthController
 {
@@ -25,9 +22,9 @@ class AuthController
         return redirect(route('login'));
     }
 
-    public function logout(): RedirectResponse
+    public function logout(UserServiceContract $userService): RedirectResponse
     {
-        Auth::logout();
+        $userService->logout();
 
         return redirect(route('all'));
     }
@@ -39,22 +36,14 @@ class AuthController
         return redirect(route('all'));
     }
 
-    public function github(): RedirectResponse
+    public function github(UserServiceContract $userService): RedirectResponse
     {
-        return Socialite::driver('github')->redirect();
+        return $userService->github();
     }
 
-    public function githubRedirect()//: RedirectResponse
+    public function githubRedirect(UserServiceContract $userService): RedirectResponse
     {
-        $user = Socialite::driver('github')->user();
-        $user = User::firstOrCreate([
-            'email' => $user['email'],
-        ], [
-            'name' => $user['name'],
-            'password' => Hash::make(Str::random(10)),
-        ]);
-
-        Auth::login($user);
+        $userService->githubRedirect();
 
         return redirect(route('all'));
     }
