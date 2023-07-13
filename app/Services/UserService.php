@@ -13,7 +13,7 @@ use Laravel\Socialite\Facades\Socialite;
 
 class UserService implements Contracts\UserServiceContract
 {
-    public function login(array $credentials):JsonResponse
+    public function login(array $credentials): JsonResponse
     {
         if (Auth::attempt($credentials)) {
             return response()->json([
@@ -26,7 +26,7 @@ class UserService implements Contracts\UserServiceContract
         ]);
     }
 
-    public function logout():JsonResponse
+    public function logout(): JsonResponse
     {
         Auth::logout();
         return response()->json([
@@ -34,7 +34,7 @@ class UserService implements Contracts\UserServiceContract
         ]);
     }
 
-    public function github():RedirectResponse
+    public function github(): RedirectResponse
     {
         return Socialite::driver('github')->redirect();
     }
