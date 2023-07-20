@@ -18,14 +18,14 @@ use App\Http\Controllers\api\PasteApiController;
 
 Route::get('/pastes', [PasteApiController::class, 'index']);
 Route::post('/pastes', [PasteApiController::class, 'store']);
-Route::get('/pastes/{id}', [PasteApiController::class, 'show']);
+Route::get('/paste/{id}', [PasteApiController::class, 'show']);
 Route::get('/pastes/public', [PasteApiController::class, 'showPublic']);
 Route::get('/pastes/private', [PasteApiController::class, 'showPrivate']);
 Route::put('/pastes/{id}', [PasteApiController::class, 'update']);
 Route::post('/pastes/{id}/report', [PasteApiController::class, 'report']);
 Route::delete('/pastes/{id}', [PasteApiController::class, 'delete']);
 
-Route::post('/users', [UserApiController::class, 'register']);
+Route::post('/users/register', [UserApiController::class, 'register']);
 Route::get('/profile', [UserApiController::class, 'profile']);
 
 Route::post('/users/login', [UserApiController::class, 'login']);

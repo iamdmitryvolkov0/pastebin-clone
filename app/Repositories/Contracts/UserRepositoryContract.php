@@ -2,10 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Model;
 
 interface UserRepositoryContract
 {
-    public function register(array $fields);
+    public function register(array $fields): Model;
 }

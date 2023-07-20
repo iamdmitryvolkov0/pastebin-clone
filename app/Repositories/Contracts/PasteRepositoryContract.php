@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface PasteRepositoryContract
 {
-    public function create(array $data): array;
+    public function create(array $data): Model;
 
     public function get(): Paginator;
 

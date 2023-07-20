@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class PasteRepository implements Contracts\PasteRepositoryContract
 {
-    public function create(array $data): array
+    public function create(array $data): Model
     {
         $hashingPhrase = $data['title'] . Auth::id() . time();
         $minutes = isset($data['hide_in']) ? Carbon::now()->addMinutes($data['hide_in']) : null;
@@ -24,7 +24,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
         $createData = [
             'title' => $data['title'],
             'body' => $data['body'],
-            'status' => $data['status'],
+            'status' => $data['status'] ?: 0,
             'user_id' => Auth::id(),
             'hash_link' => Hash::make($hashingPhrase),
             'hide_in' => $minutes,

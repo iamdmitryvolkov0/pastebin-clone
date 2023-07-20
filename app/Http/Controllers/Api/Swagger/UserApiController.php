@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Swagger;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
@@ -11,22 +11,18 @@ use Illuminate\Http\Request;
 
 class UserApiController extends Controller
 {
-
-    public function __construct(private readonly UserRepositoryContract $userRepository)
-    {
-    }
-
     /**
      * Register new user
      * @param CreateUserRequest $request
+     * @param UserRepositoryContract $userRepository
      * @return JsonResponse
      */
-    public function register(CreateUserRequest $request): JsonResponse
+    public function register(CreateUserRequest $request, UserRepositoryContract $userRepository): JsonResponse
     {
-        $user = $this->userRepository->register($request->validated());
-
+        //TODO: не ловит дату
         return response()->json([
-            'user' => $user,
+            'message' => 'User created',
+            'user' => $userRepository->register($request->validated()),
         ]);
     }
 
