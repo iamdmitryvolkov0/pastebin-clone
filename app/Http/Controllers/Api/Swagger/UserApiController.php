@@ -19,9 +19,7 @@ class UserApiController extends Controller
      */
     public function register(CreateUserRequest $request, UserRepositoryContract $userRepository): JsonResponse
     {
-        //TODO: не ловит дату
         return response()->json([
-            'message' => 'User created',
             'user' => $userRepository->register($request->validated()),
         ]);
     }
