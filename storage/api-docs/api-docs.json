@@ -1,0 +1,58 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "PasteBin Clone API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/pastes/": {},
+        "/api/pastes": {
+            "post": {
+                "tags": [
+                    "Paste"
+                ],
+                "summary": "Создание пасты",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "allOf": [
+                                    {
+                                        "properties": {
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Daily Routine"
+                                            },
+                                            "body": {
+                                                "type": "string",
+                                                "example": "Wash Dishes"
+                                            },
+                                            "status": {
+                                                "type": "enum",
+                                                "example": 0
+                                            },
+                                            "hide_in": {
+                                                "type": "integer",
+                                                "example": 30
+                                            },
+                                            "language": {
+                                                "type": "string",
+                                                "example": "php"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}
