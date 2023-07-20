@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\UserApiController;
+use App\Http\Controllers\api\PasteApiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/pastes', [PasteApiController::class, 'index']);
+Route::post('/pastes', [PasteApiController::class, 'store']);
+Route::get('/paste/{id}', [PasteApiController::class, 'show']);
+Route::get('/pastes/public', [PasteApiController::class, 'showPublic']);
+Route::get('/pastes/private', [PasteApiController::class, 'showPrivate']);
+Route::put('/pastes/{id}', [PasteApiController::class, 'update']);
+Route::post('/pastes/{id}/report', [PasteApiController::class, 'report']);
+Route::delete('/pastes/{id}', [PasteApiController::class, 'delete']);
+
+Route::post('/users/register', [UserApiController::class, 'register']);
+Route::get('/profile', [UserApiController::class, 'profile']);
+
+Route::post('/users/login', [UserApiController::class, 'login']);
+Route::post('/users/logout', [UserApiController::class, 'logout']);

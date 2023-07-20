@@ -15,23 +15,23 @@ use Illuminate\Support\Facades\Hash;
 
 class PasteRepository implements Contracts\PasteRepositoryContract
 {
-    public function create(array $data): void
+    public function create(array $data): Model
     {
-        $hashingPhrase = $data['title'].Auth::id().time();
+        $hashingPhrase = $data['title'] . Auth::id() . time();
         $minutes = isset($data['hide_in']) ? Carbon::now()->addMinutes($data['hide_in']) : null;
         $language = $data['language'] ?: null;
 
         $createData = [
             'title' => $data['title'],
             'body' => $data['body'],
-            'status' => $data['status'],
+            'status' => $data['status'] ?: 0,
             'user_id' => Auth::id(),
             'hash_link' => Hash::make($hashingPhrase),
             'hide_in' => $minutes,
             'language' => $language ?? 'language-plaintext',
         ];
 
-        Paste::create($createData);
+        return Paste::create($createData);
     }
 
     public function get(): Paginator
@@ -59,6 +59,11 @@ class PasteRepository implements Contracts\PasteRepositoryContract
         return Paste::query()->where('hash_link', $hash)->firstOrFail();
     }
 
+    public function getById(int $id): Model|Builder
+    {
+        return Paste::query()->where('id', $id)->firstOrFail();
+    }
+
     public function hideExpired(): void
     {
         Paste::query()
@@ -81,7 +86,7 @@ class PasteRepository implements Contracts\PasteRepositoryContract
         $paste->delete();
     }
 
-    public function reportById(int $id):void
+    public function reportById(int $id): void
     {
         $paste = Paste::query()->findOrFail($id);
         $report = new Report();

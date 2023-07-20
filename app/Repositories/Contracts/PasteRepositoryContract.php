@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 interface PasteRepositoryContract
 {
-    public function create(array $data): void;
+    public function create(array $data): Model;
 
     public function get(): Paginator;
 
@@ -18,11 +18,13 @@ interface PasteRepositoryContract
 
     public function getSingle(string $hash): Model|Builder;
 
+    public function getById(int $id);
+
     public function hideExpired(): void;
 
     public function updateStatus(int $id): void;
 
     public function deleteById(int $id): void;
 
-    public function reportById(int $id):void;
+    public function reportById(int $id): void;
 }

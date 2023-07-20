@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string $name Имя пользователя
  * @property string $email Адрес электронной почты
  * @property string $password Пароль
- * @property boolean $is_banned Статус бана пользователя
+ * @property bool $is_banned Статус бана пользователя
  */
 class User extends Authenticatable
 {
@@ -39,6 +39,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+
     ];
 
     /**

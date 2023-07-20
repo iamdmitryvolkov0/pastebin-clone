@@ -3,11 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class UserRepository implements Contracts\UserRepositoryContract
 {
-    public function register(array $fields): void
+    public function register(array $fields): Model
     {
         $user = User::create([
             'name' => $fields['name'],
@@ -17,5 +18,7 @@ class UserRepository implements Contracts\UserRepositoryContract
         if ($user) {
             Auth::login($user);
         }
+        return $user;
     }
+
 }

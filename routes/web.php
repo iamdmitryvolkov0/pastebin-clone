@@ -30,7 +30,6 @@ Route::post('/delete', [PastesController::class, 'delete'])->name('delete');
 Route::post('/update', [PastesController::class, 'update'])->name('update');
 Route::post('/paste/{hash}/report', [PastesController::class, 'report'])->name('report')->middleware('auth');
 
-
 Route::get('/login', [AuthFormsController::class, 'login'])->name('login');
 Route::post('/login_process', [AuthController::class, 'login'])->name('login_process');
 Route::get('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');

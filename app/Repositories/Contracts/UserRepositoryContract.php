@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
+use Illuminate\Database\Eloquent\Model;
+
 interface UserRepositoryContract
 {
-    public function register(array $fields): void;
+    public function register(array $fields): Model;
 }
