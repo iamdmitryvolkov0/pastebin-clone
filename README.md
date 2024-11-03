@@ -5,7 +5,7 @@
   </head>
   <body>
     <h1>PasteBin Simple Clone</h1>
-    <p>Тестовое задание на позицию PHP (Laravel) Backend developer @Atwinta </p>
+    <p>Тестовое задание на позицию PHP (Laravel) Backend developer </p>
     <h2>Установка</h2>
     <ol>
       <li>Клонируйте репозиторий в локальное хранилище.</li>
